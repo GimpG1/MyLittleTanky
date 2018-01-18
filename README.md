@@ -12,7 +12,7 @@
  Initially, "new age" where the rarity is electromagnetic and electromagnetic shield against bullets.
  Game begins to be a tank that will not be brand new for its time.
 
-#Object list
+# Object list
 
 Legend: Name(Function in Game)
 ```
@@ -73,21 +73,21 @@ Enemy (Mine)
 
   * Place Holder & 1h
   * Test scene  & 1h
-    # Game models
-     - [ ] Tank & 10h per one
-     - [ ] Tank equipment 
-      - [ ] Tank track & 2h
-       - [ ] Tower two kinds & 1h per once
-     - [ ] Mines two kinds  & 2h per once
-     - [ ] Bunker two kinds & 4h per once
-    # Scripts
-     - [ ] GUIController & 2h
-        - [ ] Load level
-        - [ ] Settings
-           - [ ] Sound volume
-           - [ ] SFX volume
-        - [ ] Exit
-     - [ ] TankController & 5h 
+  # Game models
+   - [ ] Tank & 10h per one
+   - [ ] Tank equipment 
+   - [ ] Tank track & 2h
+   - [ ] Tower two kinds & 1h per once
+   - [ ] Mines two kinds  & 2h per once
+   - [ ] Bunker two kinds & 4h per once
+  # Scripts
+   - [ ] GUIController & 2h
+   - [ ] Load level
+   - [ ] Settings
+        - [ ] Sound volume
+        - [ ] SFX volume
+   - [ ] Exit
+   - [ ] TankController & 5h 
         - [ ] Tank move
         - [ ] Rotate tank tower
         - [ ] Claim equipment
@@ -95,39 +95,39 @@ Enemy (Mine)
         - [ ] Tank hp
         - [ ] Tank fuel
         - [ ] Enemy detector (laser build only)
-     - [ ] AITankController & 1h 
+   - [ ] AITankController & 1h 
         - [ ] AI range (coolider)
         - [ ] AI attack (look at tag "Player", make action attack)
         - [ ] AI hp () at life end
-     - [ ] PlayersController
-	    - [ ] Hp
-		- [ ] Fuel
-		- [ ] Attack
-		- [ ] Ammunation
-     - [ ] Sound control
+   - [ ] PlayersController
+	 - [ ] Hp
+	 - [ ] Fuel
+	 - [ ] Attack
+	 - [ ] Ammunation
+   - [ ] Sound control
         - [ ] Main mixer
         - [ ] AI detect sound
-    # Practicle system
-     - [ ] Explosion FX (standard amunnation) & 5h
-     - [ ] Explosion FX (mine) & 5h
-     - [ ] Schoot FX (laser tower) & 5h
-     - [ ] Move FX & 5h
-    # Sound System
-     - [ ] Main menu sound theme
-     - [ ] In game sounds
-        - [ ] Sand sound
-        - [ ] Forest sound
-        - [ ] Hill sound
-     - [ ] Explosion FX
-        - [ ] Mine sound
-        - [ ] Mine defeat
-        - [ ] Bunker attack sound
-        - [ ] Bunker defeat
-     - [ ] AI and hero
-        - [ ] Ammunition sound
-        - [ ] Laser sound
-        - [ ] Movement sound
-        - [ ] AI detect (hero only)
+ # Practicle system
+  - [ ] Explosion FX (standard amunnation) & 5h
+  - [ ] Explosion FX (mine) & 5h
+  - [ ] Schoot FX (laser tower) & 5h
+  - [ ] Move FX & 5h
+ # Sound System
+  - [ ] Main menu sound theme
+  - [ ] In game sounds
+    - [ ] Sand sound
+    - [ ] Forest sound
+    - [ ] Hill sound
+  - [ ] Explosion FX
+    - [ ] Mine sound
+    - [ ] Mine defeat
+    - [ ] Bunker attack sound
+    - [ ] Bunker defeat
+  - [ ] AI and hero
+    - [ ] Ammunition sound
+    - [ ] Laser sound
+    - [ ] Movement sound
+    - [ ] AI detect (hero only)
          
 Time totally: 110h + possible further development () w/o sound
 
@@ -141,7 +141,7 @@ Models:
 
 # Links
 
-  *Damage mechanics (Static Objects and AI)
+  * Damage mechanics (Static Objects and AI)
   http://www.dofactory.com/net/observer-design-pattern
   https://www.codeproject.com/Articles/866547/Publisher-Subscriber-pattern-with-Event-Delegate-a
   * View changes before click play
