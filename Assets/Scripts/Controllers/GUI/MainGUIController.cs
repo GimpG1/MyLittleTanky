@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainGUIController : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class MainGUIController : MonoBehaviour
 
     public void OnStartClick()
     {
-        Application.LoadLevel("PlaceHolder");
+        SceneManager.LoadScene("PlaceHolder");
     }
 
     public void OnSettingsClick()

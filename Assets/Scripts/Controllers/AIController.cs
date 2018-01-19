@@ -18,7 +18,7 @@ public class AIController : MonoBehaviour
     {
         if (_attack)
         {
-            transform.position = _playerTransform.transform.position - Vector3.Lerp(transform.position,_playerTransform.transform.position, 0);
+            transform.position = transform.position - _playerTransform.transform.position;
         }
         else if (!_attack)
         {
