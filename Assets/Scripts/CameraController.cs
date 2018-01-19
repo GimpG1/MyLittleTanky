@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+#region Private Variables
     [SerializeField] GameObject _MyHero;
-    
+    // Less smooth is better
+    private float _smoothCamera = .5f;
+    private float _cameraUpDistance = 3f;
+    private float _cameraAwayDistance = 8f;
     private Vector3 offset;
-
+#endregion
     void Start ()
     {
         if (_MyHero == null)
@@ -27,8 +31,8 @@ public class CameraController : MonoBehaviour
 	void LateUpdate ()
     {
         transform.LookAt(_MyHero.GetComponent<Transform>());
-        Vector3 desPoint = _MyHero.transform.position + _MyHero.transform.up * 3f - _MyHero.transform.forward * 8f;
-        Vector3 endPosition = Vector3.Lerp(transform.position, desPoint, Time.deltaTime * 1f);
+        Vector3 desPoint = _MyHero.transform.position + _MyHero.transform.up * _cameraUpDistance - _MyHero.transform.forward * _cameraAwayDistance;
+        Vector3 endPosition = Vector3.Lerp(transform.position, desPoint, Time.deltaTime * _smoothCamera);
         transform.position = endPosition;
     }
 }

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
+    // Tank base speed
     private float _tankSpeed = 10f;
-	
-	void Start ()
+    public Texture2D _tankDative;
+
+    private void Awake()
     {
-		
-	}
-	
-	
-	void FixedUpdate ()
+        Cursor.visible = true;
+        Cursor.SetCursor(_tankDative, Vector2.zero, CursorMode.ForceSoftware);
+    }
+    private void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -29,6 +30,10 @@ public class MovementController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Rotate(Vector3.up);
+        }
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Debug.Log("Fire !");
         }
     }
 }
