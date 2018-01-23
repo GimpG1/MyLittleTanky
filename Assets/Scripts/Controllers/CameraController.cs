@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     private float _cameraUpDistance = 3f;
     private float _cameraAwayDistance = 8f;
     private Vector3 offset;
-#endregion
+    #endregion
     void Start ()
     {
         if (_MyHero == null)
@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
             {
                 _MyHero = GameObject.FindWithTag("Player");
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
                 Debug.Log("Get game object via script failed.");
             }

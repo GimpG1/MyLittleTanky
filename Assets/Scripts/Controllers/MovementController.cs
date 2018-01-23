@@ -6,12 +6,9 @@ public class MovementController : MonoBehaviour
 {
     // Tank base speed
     private float _tankSpeed = 10f;
-    public Texture2D _tankDative;
     private InGameGUIController _inGameMenu;
     private void Awake()
     {
-        Cursor.visible = true;
-        Cursor.SetCursor(_tankDative, Vector2.zero, CursorMode.ForceSoftware);
         _inGameMenu = GameObject.Find("InGameCanvas").GetComponent<InGameGUIController>();
     }
     private void Update()

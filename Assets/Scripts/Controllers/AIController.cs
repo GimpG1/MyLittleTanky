@@ -18,26 +18,16 @@ public class AIController : MonoBehaviour
     {
         if (_attack)
         {
-            transform.position = transform.position - _playerTransform.transform.position;
-        }
-        else if (!_attack)
-        {
-            transform.position = _aiDefaultPos;
+            transform.LookAt(_playerTransform);
+            transform.position = (_playerTransform.transform.position - transform.position).normalized;
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             this._attack = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            this._attack = false;
         }
     }
 }

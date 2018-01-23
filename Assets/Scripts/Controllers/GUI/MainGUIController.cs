@@ -19,7 +19,9 @@ public class MainGUIController : MonoBehaviour
     private Text _sfxInfoTxt;
 
     [SerializeField] GameObject _menuCanvas;
+    [SerializeField] SetGameCursor _setCur;
     #endregion
+
     private void Awake()
     {
         _startBtn = GameObject.Find("StartBTN").GetComponent<Button>();
@@ -32,6 +34,7 @@ public class MainGUIController : MonoBehaviour
 
         _soundInfoTxt = GameObject.Find("SoundInfo").GetComponent<Text>();
         _sfxInfoTxt = GameObject.Find("SFXInfo").GetComponent<Text>();
+        _setCur.SetGuiCursor();
     }
 
     private void Start()
@@ -42,10 +45,13 @@ public class MainGUIController : MonoBehaviour
 
         _soundInfoTxt.gameObject.SetActive(false);
         _sfxInfoTxt.gameObject.SetActive(false);
+        
     }
 
     public void OnStartClick()
     {
+        _setCur.SetInGameCursor();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("PlaceHolder");
     }
 
@@ -81,4 +87,5 @@ public class MainGUIController : MonoBehaviour
         _soundInfoTxt.gameObject.SetActive(false);
         _sfxInfoTxt.gameObject.SetActive(false);
     }
+    
 }

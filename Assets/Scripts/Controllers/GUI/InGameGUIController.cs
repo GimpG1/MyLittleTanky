@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InGameGUIController : MonoBehaviour
 {
@@ -20,9 +21,8 @@ public class InGameGUIController : MonoBehaviour
 
     private Canvas _inCanvas;
     [SerializeField] GameObject _menuCanvas;
-
+    [SerializeField] SetGameCursor _setCur;
     #endregion
-
     private void Awake()
     {
         _backToGameBtn = GameObject.Find("InBackToGameBTN").GetComponent<Button>();
@@ -39,10 +39,55 @@ public class InGameGUIController : MonoBehaviour
         _inCanvas = gameObject.GetComponent<Canvas>();
         _inCanvas.enabled = false;
     }
-
     public void OnEscape()
     {
-        
-        Debug.Log("Esc pressed");
+        LoadGui();
+    }
+    public void LoadGui()
+    {
+        _setCur.SetGuiCursor();
+        _inCanvas.enabled = true;
+        Time.timeScale = 0f;
+        DefaultGuiSetUp();
+    }
+    public void DefaultGuiSetUp()
+    {
+        _backToGameBtn.gameObject.SetActive(true);
+        _settingsBtn.gameObject.SetActive(true);
+        _exitBtn.gameObject.SetActive(true);
+
+        _backBtn.gameObject.SetActive(false);
+        _soundSR.gameObject.SetActive(false);
+        _sfxSR.gameObject.SetActive(false);
+
+        _soundInfoTxt.gameObject.SetActive(false);
+        _sfxInfoTxt.gameObject.SetActive(false);
+    }
+    public void OnBackToGameClick()
+    {
+        _setCur.SetInGameCursor(); ;
+        _inCanvas.enabled = false;
+        Time.timeScale = 1f;
+    }
+    public void OnSettingsClick()
+    {
+        _backToGameBtn.gameObject.SetActive(false);
+        _settingsBtn.gameObject.SetActive(false);
+        _exitBtn.gameObject.SetActive(false);
+
+        _backBtn.gameObject.SetActive(true);
+        _soundSR.gameObject.SetActive(true);
+        _sfxSR.gameObject.SetActive(true);
+
+        _soundInfoTxt.gameObject.SetActive(true);
+        _sfxInfoTxt.gameObject.SetActive(true);
+    }
+    public void OnBackClick()
+    {
+        DefaultGuiSetUp();
+    }
+    public void OnExitClick()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
