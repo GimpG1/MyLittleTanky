@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsAMMUNATION : MonoBehaviour {
-    private float _ammunation;
+    private int _ammunation;
 
-    public float SetGetAmmunation
+    public int SetGetAmmunation
     {
         get
         {

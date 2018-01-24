@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectsHP : MonoBehaviour {
-    private float _hp;
+public class ObjectsHP : MonoBehaviour
+{
+    private int _hp;
 
-    public float SetGetHp
+    public int SetGetHp
     {
         get
         {

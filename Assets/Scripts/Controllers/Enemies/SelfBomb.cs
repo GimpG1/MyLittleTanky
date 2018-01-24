@@ -6,7 +6,9 @@ public class SelfBomb : MonoBehaviour
 {
     #region Private Variables
     bool _attack = false;
+    float _speed = 5f;
     [SerializeField] private Transform _playerTransform;
+    HeroDefaultStats hero;
     #endregion
 
     private void Update()
@@ -14,7 +16,7 @@ public class SelfBomb : MonoBehaviour
         if (_attack)
         {
             transform.LookAt(_playerTransform);
-            transform.position = Vector3.MoveTowards(transform.position, _playerTransform.position, 1f);
+            transform.position = Vector3.MoveTowards(transform.position, _playerTransform.position, _speed * Time.deltaTime);
         }
     }
 
@@ -25,8 +27,18 @@ public class SelfBomb : MonoBehaviour
             if (_playerTransform == null)
             {
                 _playerTransform = other.gameObject.GetComponent<Transform>();
+                hero = other.gameObject.GetComponent<HeroDefaultStats>();
             }
             this._attack = true;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision != null)
+        {
+            hero.TakeDamage(20);
+            Destroy(gameObject);
         }
     }
 }

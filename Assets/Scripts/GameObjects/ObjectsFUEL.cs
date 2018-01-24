@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsFUEL : MonoBehaviour {
-    private float _fuel;
+    private int _fuel;
 
-    public float SetGetFuel
+    public int SetGetFuel
     {
         get
         {

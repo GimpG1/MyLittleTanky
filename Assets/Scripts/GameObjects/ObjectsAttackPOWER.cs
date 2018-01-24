@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsAttackPOWER : MonoBehaviour {
-    private float _attackPower;
+    private int _attackPower;
 
-    public float SetGetAttackPower
+    public int SetGetAttackPower
     {
         get
         {

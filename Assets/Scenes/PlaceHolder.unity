@@ -1130,7 +1130,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 490634, guid: 63ff2386a1262d64f99de6e3e1183874, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 17.919817
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 490634, guid: 63ff2386a1262d64f99de6e3e1183874, type: 2}
       propertyPath: m_LocalPosition.z
@@ -4702,6 +4702,7 @@ GameObject:
   - component: {fileID: 2098107576}
   - component: {fileID: 2098107575}
   - component: {fileID: 2098107574}
+  - component: {fileID: 2098107578}
   m_Layer: 0
   m_Name: TankFixedAim
   m_TagString: Player
@@ -4816,6 +4817,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b09a5be7861bf4ab3b4ad522e4a8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2098107578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2098107569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b81597c88325394fab55062b0b91d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startHP: 100
+  _startFUEL: -261
+  _startAMMUNATION: 100
+  _attactPower: 78
 --- !u!1 &2104314285
 GameObject:
   m_ObjectHideFlags: 0
