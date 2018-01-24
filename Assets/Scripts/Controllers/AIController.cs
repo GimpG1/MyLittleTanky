@@ -22,6 +22,7 @@ public class AIController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            
             this._attack = true;
         }
     }
