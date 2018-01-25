@@ -7,9 +7,10 @@ public class Turrent : MonoBehaviour
 	#region Private Variables
 	[SerializeField] HeroStats hero;
 	[SerializeField] DetectPlayer detector;
-	[SerializeField] ObjectsHP hp;
-	[SerializeField] ObjectsAttackPOWER power;
+	[SerializeField] ObjectsHP _turretHP;
 	[SerializeField] BonusController defeatBonus;
+	private bool _turretDamaged;
+	private Vector3 _defPos;
 	#endregion
 
 	private void Awake()
@@ -18,15 +19,10 @@ public class Turrent : MonoBehaviour
 		{
 			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
 		}
-		if (hp == null) 
+		if (_turretHP == null) 
 		{
-			hp = gameObject.GetComponent<ObjectsHP> ();
-			hp.SetGetHp = 300;
-		}
-		if (power == null) 
-		{
-			power = gameObject.GetComponent<ObjectsAttackPOWER> ();
-			power.SetGetAttackPower = 10;
+			_turretHP = gameObject.GetComponent<ObjectsHP> ();
+			_turretHP.SetGetHp = 300;
 		}
 		if (detector == null) 
 		{
@@ -38,12 +34,17 @@ public class Turrent : MonoBehaviour
 		}
 	}
 
+	private void Start()
+	{
+		_defPos = transform.position;
+	}
 	private void Update()
 	{
 		if (detector.IsDetected)
 		{
 			TurrentAttack (detector.HeroTransform);
-
+			transform.position = _defPos;
+			IsDamaged = false;
 		}
 	}
 
@@ -53,5 +54,36 @@ public class Turrent : MonoBehaviour
 		Quaternion lookRotation = Quaternion.LookRotation (direction);
 		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
 		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+	}
+
+	public void TakeDamage(int damage)
+	{
+		_turretHP.SetGetHp -= damage;
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (!collision.gameObject.CompareTag("Terrain"))
+		{
+			TakeDamage(hero.GetComponentInChildren<ObjectsAttackPOWER>().SetGetAttackPower);
+			IsDamaged = true;
+			if (_turretHP.SetGetHp <= 0) 
+			{
+				defeatBonus.SetBonusActive = true;
+				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));
+				Destroy(gameObject);
+			}
+		}
+	}
+	public bool IsDamaged
+	{
+		get
+		{
+			return _turretDamaged;
+		}
+		set
+		{ 
+			_turretDamaged = value;
+		}
 	}
 }

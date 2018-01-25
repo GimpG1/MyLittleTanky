@@ -7,6 +7,7 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] ObjectsHP _tankHp;
 	[SerializeField] ObjectsFUEL _tankFuel;
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
+	[SerializeField] ObjectsAttackPOWER _tankMainPower;
 	public float _itsPosition;
     bool _isMoving = false;
 
@@ -14,15 +15,18 @@ public class HeroStats : MonoBehaviour
     {
 		if (_tankHp == null ||
 			_tankFuel == null ||
-			_tankAmmo == null) 
+			_tankAmmo == null ||
+			_tankMainPower == null) 
 		{
 			_tankHp = gameObject.GetComponent<ObjectsHP> ();
 			_tankFuel = gameObject.GetComponent<ObjectsFUEL> ();
 			_tankAmmo = gameObject.GetComponent<ObjectsAMMUNATION> ();
+			_tankMainPower = gameObject.GetComponent<ObjectsAttackPOWER> ();
 
 			_tankHp.SetGetHp = 100;
 			_tankFuel.SetGetFuel = 1000;
 			_tankAmmo.SetGetAmmunation = 5;
+			_tankMainPower.SetGetAttackPower = 50;
 		}
     }
 
