@@ -43,13 +43,15 @@ public class Turrent : MonoBehaviour
 		if (detector.IsDetected)
 		{
 			TurrentAttack (detector.HeroTransform);
+
 		}
 	}
 
 	private void TurrentAttack(Transform player)
 	{
 		Vector3 direction = player.position - transform.position;
-		Quaternion rotation = Quaternion.LookRotation (direction);
-		transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 2f* Time.deltaTime);
+		Quaternion lookRotation = Quaternion.LookRotation (direction);
+		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
+		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 	}
 }

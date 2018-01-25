@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
             try
             {
                 _MyHero = GameObject.FindWithTag("Player");
+				Debug.LogWarning("Sucess");
             }
             catch (System.Exception)
             {
