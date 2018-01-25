@@ -21,12 +21,12 @@ public class MovementController : MonoBehaviour
 
     private void CheckFuel()
     {
-		_itsFuel = _heroStats.SetFuel;
-        if (_itsFuel > 0.0f)
+		_itsFuel = _heroStats.GetComponentInChildren<ObjectsFUEL>().SetGetFuel;
+        if (_itsFuel > 0)
         {
             _hasFuel = true;
         }
-		else if (_itsFuel < 1.0f) 
+		else if (_itsFuel < 1) 
 		{
 			_hasFuel = false;
 		}

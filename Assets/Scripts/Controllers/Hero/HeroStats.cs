@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
-    public int _startHP = 100;
-    public float _startFUEL;
-    public int _startAMMUNATION;
-    // Its own
-    public int _attactPower = 5;
+	[SerializeField] ObjectsHP _tankHp;
+	[SerializeField] ObjectsFUEL _tankFuel;
+	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	public float _itsPosition;
     bool _isMoving = false;
 
     void Awake()
     {
-		SetFuel = 10;
-		SetAmmo = 10;
+		if (_tankHp == null ||
+			_tankFuel == null ||
+			_tankAmmo == null) 
+		{
+			_tankHp = gameObject.GetComponent<ObjectsHP> ();
+			_tankFuel = gameObject.GetComponent<ObjectsFUEL> ();
+			_tankAmmo = gameObject.GetComponent<ObjectsAMMUNATION> ();
+
+			_tankHp.SetGetHp = 100;
+			_tankFuel.SetGetFuel = 1000;
+			_tankAmmo.SetGetAmmunation = 5;
+		}
     }
 
 	void Start()
@@ -33,44 +41,20 @@ public class HeroStats : MonoBehaviour
 		
         if (_isMoving)
         {
-            LoseFuel(SetFuel);
+            LoseFuel(_tankFuel.SetGetFuel);
         }
     }
 
     public void TakeDamage(int damage)
     {
-        _startHP -= damage;
+        _tankHp.SetGetHp -= damage;
     }
 
-    private void LoseFuel(float fuel)
+    private void LoseFuel(int fuel)
     {
-		if (SetFuel > 0f) 
+		if (_tankFuel.SetGetFuel > 0f) 
 		{
-			SetFuel -= Time.deltaTime;
+			_tankFuel.SetGetFuel--;
 		}
     }
-
-    public float SetFuel
-    {
-        get
-        {
-            return _startFUEL;
-        }
-        set
-        {
-            _startFUEL = value;
-        }
-    }
-
-	public int SetAmmo
-	{
-		get
-		{
-			return _startAMMUNATION;
-		}
-		set
-		{
-			_startAMMUNATION = value;
-		}
-	}
 }

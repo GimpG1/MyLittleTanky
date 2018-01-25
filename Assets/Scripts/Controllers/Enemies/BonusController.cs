@@ -8,13 +8,14 @@ public class BonusController : MonoBehaviour
 	[SerializeField] ObjectsAMMUNATION ammo;
 	[SerializeField] HeroStats hero;
 	private bool _isActive = false;
+	float timeLeft = 12f;
 
 	private void Awake()
 	{
 		if (fuel == null) 
 		{
 			fuel = gameObject.GetComponent<ObjectsFUEL> ();
-			fuel.SetGetFuel = Random.Range (20, 100);
+			fuel.SetGetFuel = Random.Range (500, 1000);
 		}
 		if (ammo == null) 
 		{
@@ -30,7 +31,27 @@ public class BonusController : MonoBehaviour
 	private void Update()
 	{
 		gameObject.GetComponent<MeshRenderer> ().enabled = _isActive;
+		if (gameObject.GetComponent<MeshRenderer>().enabled) 
+		{
+			timeLeft -= Time.deltaTime;
+		}
+		if (timeLeft <= 0f) 
+		{
+			SetBonusActive = false;
+		}
 	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Player"))
+		{
+			hero.GetComponentInChildren<ObjectsFUEL>().SetGetFuel += fuel.SetGetFuel;
+			hero.GetComponentInChildren<ObjectsAMMUNATION>().SetGetAmmunation += ammo.SetGetAmmunation;
+			SetBonusActive = false;
+			timeLeft = 12f;
+		}
+	}
+
 
 	public bool SetBonusActive
 	{
@@ -44,13 +65,8 @@ public class BonusController : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
+	public void SpawnPlace(Vector3 spawnPos)
 	{
-		if (other.gameObject.CompareTag("Player"))
-		{
-			hero.SetFuel += fuel.SetGetFuel;
-			hero.SetAmmo += ammo.SetGetAmmunation;
-			SetBonusActive = false;
-		}
+		transform.position = spawnPos;
 	}
 }

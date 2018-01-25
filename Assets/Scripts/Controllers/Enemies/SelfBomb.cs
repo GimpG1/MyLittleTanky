@@ -52,6 +52,7 @@ public class SelfBomb : MonoBehaviour
         {
 			hero.TakeDamage (power.SetGetAttackPower);
 			defeatBonus.SetBonusActive = true;
+			defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));
             Destroy(gameObject);
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectsFUEL : MonoBehaviour {
-    private int _fuel;
+	private int _fuel;
 
     public int SetGetFuel
     {
