@@ -10,8 +10,21 @@ public class HeroDefaultStats : MonoBehaviour
     // Its own
     public int _attactPower = 5;
 
+
     public void TakeDamage(int damage)
     {
         _startHP -= damage;
+    }
+
+    public int SetFuel
+    {
+        get
+        {
+            return _startFUEL;
+        }
+        set
+        {
+            _startFUEL = value;
+        }
     }
 }

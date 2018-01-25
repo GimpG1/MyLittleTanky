@@ -5,39 +5,53 @@ using UnityEngine;
 public class SelfBomb : MonoBehaviour
 {
     #region Private Variables
-    bool _attack = false;
-    float _speed = 5f;
-    [SerializeField] private Transform _playerTransform;
-    HeroDefaultStats hero;
+	[SerializeField] float _speed = 5f;
+	[SerializeField] HeroStats hero;
+	[SerializeField] DetectPlayer detector;
+	[SerializeField] ObjectsAttackPOWER power;
+	[SerializeField] BonusController defeatBonus;
     #endregion
+
+    private void Awake()
+    {
+		if (hero == null)
+		{
+			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
+		}
+		if (power == null) 
+		{
+			power = gameObject.GetComponent<ObjectsAttackPOWER> ();
+			power.SetGetAttackPower = 30;
+		}
+		if (detector == null) 
+		{
+			detector = gameObject.GetComponent<DetectPlayer> ();
+		}
+		if (defeatBonus == null) 
+		{
+			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
+		}
+    }
 
     private void Update()
     {
-        if (_attack)
+		if (detector.IsDetected)
         {
-            transform.LookAt(_playerTransform);
-            transform.position = Vector3.MoveTowards(transform.position, _playerTransform.position, _speed * Time.deltaTime);
+			SelfBombAttack (detector.HeroTransform);
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            if (_playerTransform == null)
-            {
-                _playerTransform = other.gameObject.GetComponent<Transform>();
-                hero = other.gameObject.GetComponent<HeroDefaultStats>();
-            }
-            this._attack = true;
-        }
-    }
+	private void SelfBombAttack(Transform player)
+	{
+		transform.position = Vector3.MoveTowards(transform.position, player.position, _speed * Time.deltaTime);
+	}
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision != null)
+		if (!collision.gameObject.CompareTag("Terrain"))
         {
-            hero.TakeDamage(20);
+			hero.TakeDamage (power.SetGetAttackPower);
+			defeatBonus.SetBonusActive = true;
             Destroy(gameObject);
         }
     }
