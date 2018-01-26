@@ -54,11 +54,6 @@ public class Turrent : MonoBehaviour
 		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 	}
 
-	public void TakeDamage(int damage)
-	{
-		_turretHP.SetGetHp -= damage;
-	}
-
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (!collision.gameObject.CompareTag("Terrain"))
@@ -72,6 +67,11 @@ public class Turrent : MonoBehaviour
 				Destroy(gameObject);
 			}
 		}
+	}
+
+	public void TakeDamage(int damage)
+	{
+		_turretHP.SetGetHp -= damage;
 	}
 
 }

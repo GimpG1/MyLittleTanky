@@ -11,7 +11,7 @@ public class Warrior : MonoBehaviour
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
 	[SerializeField] ProjectileHandler _ammoControl;
-	[SerializeField] GameObject ammo;
+	//[SerializeField] GameObject ammo;
 	#endregion
 
 
@@ -41,17 +41,19 @@ public class Warrior : MonoBehaviour
 		{
 			WarriorAttack (detector.HeroTransform);
 			_isDamaged.SetGetDamaged = false;
-			ammo =_ammoControl.Pull ();
-			ammo.transform.position = gameObject.transform.position;
+			var obj =  _ammoControl.Pull ();
+			obj.transform.position = new Vector3(transform.position.x + 1,transform.position.y + 1, transform.position.z);
 		}
 	}
 	private void WarriorAttack(Transform player)
 	{
-		ammo.transform.position = player.transform.position;
-	}
-	public void TakeDamage(int damage)
-	{
-		_warriorHP.SetGetHp -= damage;
+		Vector3 direction = player.position - transform.position;
+		Quaternion lookRotation = Quaternion.LookRotation (direction);
+		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
+		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+		var obj = GameObject.Find ("Amunation").GetComponent<Transform> ();
+		obj.transform.position = Vector3.MoveTowards(transform.position, player.position, 5f * Time.deltaTime);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -59,14 +61,18 @@ public class Warrior : MonoBehaviour
 		if (!collision.gameObject.CompareTag("Terrain"))
 		{
 			TakeDamage(hero.GetComponentInChildren<ObjectsAttackPOWER>().SetGetAttackPower);
+
 			_isDamaged.SetGetDamaged = true;
 			if (_warriorHP.SetGetHp <= 0) 
 			{
 				defeatBonus.SetBonusActive = true;
-				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));
-				Destroy(gameObject);
+				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z + 1));
+				gameObject.SetActive (false);
 			}
 		}
 	}
-
+	public void TakeDamage(int damage)
+	{
+		_warriorHP.SetGetHp -= damage;
+	}
 }

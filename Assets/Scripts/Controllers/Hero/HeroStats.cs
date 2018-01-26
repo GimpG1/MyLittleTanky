@@ -8,10 +8,11 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] ObjectsFUEL _tankFuel;
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	[SerializeField] ObjectsAttackPOWER _tankMainPower;
+	[SerializeField] DamagedController _isDamaged;
 	public float _itsPosition;
-    bool _isMoving = false;
+    private bool _isMoving = false;
 
-    void Awake()
+	private void Awake()
     {
 		if (_tankHp == null ||
 			_tankFuel == null ||
@@ -22,6 +23,7 @@ public class HeroStats : MonoBehaviour
 			_tankFuel = gameObject.GetComponent<ObjectsFUEL> ();
 			_tankAmmo = gameObject.GetComponent<ObjectsAMMUNATION> ();
 			_tankMainPower = gameObject.GetComponent<ObjectsAttackPOWER> ();
+			_isDamaged = gameObject.GetComponent<DamagedController> ();
 
 			_tankHp.SetGetHp = 100;
 			_tankFuel.SetGetFuel = 1000;
@@ -30,35 +32,61 @@ public class HeroStats : MonoBehaviour
 		}
     }
 
-	void Start()
+	private void Start()
 	{
 		_itsPosition = transform.position.x;
 	}
 
-    void Update()
+	private void Update()
     {
 		if (_itsPosition > transform.position.x || _itsPosition < transform.position.x) {
-			_isMoving = true;
+			IsMoving = true;
 		} 
 		else
-			_isMoving = false;
+			IsMoving = false;
 		
         if (_isMoving)
         {
             LoseFuel(_tankFuel.SetGetFuel);
         }
+		SetDamaged (_tankHp.SetGetHp);
+		if (_tankHp.SetGetHp <= 0) 
+		{
+			gameObject.SetActive (false);
+		}
     }
 
-    public void TakeDamage(int damage)
-    {
-        _tankHp.SetGetHp -= damage;
-    }
-
-    private void LoseFuel(int fuel)
-    {
+	private void LoseFuel(int fuel)
+	{
 		if (_tankFuel.SetGetFuel > 0f) 
 		{
 			_tankFuel.SetGetFuel--;
 		}
+	}
+
+	private void SetDamaged (int hp)
+	{
+		if (hp < _tankHp.SetGetHp) 
+		{
+			_isDamaged.SetGetDamaged = false;
+		}
+		else
+			_isDamaged.SetGetDamaged = true;
+	}
+    public void TakeDamage(int damage)
+    {
+		_tankHp.SetGetHp -= damage;
     }
+
+	public bool IsMoving
+	{
+		get
+		{
+			return _isMoving;
+		}
+		set
+		{ 
+			_isMoving = value;
+		}
+	}
 }

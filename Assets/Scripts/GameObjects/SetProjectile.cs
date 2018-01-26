@@ -7,7 +7,7 @@ public class SetProjectile : MonoBehaviour
 	[SerializeField] private ObjectsAttackPOWER _ammoPower;
 	[SerializeField] private ProjectileHandler _projectileHand;
 	[SerializeField] private HeroStats _hero;
-	[SerializeField] private float _lifeTime = 5f;
+	[SerializeField] private float _lifeTime = 2f;
 	 
 	private void Awake() 
 	{
@@ -20,6 +20,11 @@ public class SetProjectile : MonoBehaviour
 	private void Update()
 	{
 		_lifeTime -= Time.deltaTime;
+		if (_lifeTime <= 0.0f)
+		{
+			_projectileHand.Push (gameObject);
+			Destroy (gameObject);
+		}
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -28,10 +33,7 @@ public class SetProjectile : MonoBehaviour
 		{
 			_hero.TakeDamage (_ammoPower.SetGetAttackPower);
 			_projectileHand.Push (gameObject);
-		}
-		else if (_lifeTime <= 0.0f)
-		{
-			_projectileHand.Push (gameObject);
+			Destroy (gameObject);
 		}
 	}
 }

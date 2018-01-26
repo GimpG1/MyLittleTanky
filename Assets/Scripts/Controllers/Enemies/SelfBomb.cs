@@ -10,6 +10,7 @@ public class SelfBomb : MonoBehaviour
 	[SerializeField] DetectPlayer detector;
 	[SerializeField] ObjectsAttackPOWER power;
 	[SerializeField] BonusController defeatBonus;
+	[SerializeField] AudioClip bom;
     #endregion
 
     private void Awake()
@@ -31,8 +32,14 @@ public class SelfBomb : MonoBehaviour
 		{
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 		}
-    }
+		gameObject.GetComponent<AudioSource> ().playOnAwake = false;
+		gameObject.GetComponent<AudioSource> ().Stop();
 
+    }
+	private void Start()
+	{
+		gameObject.GetComponent<AudioSource> ().clip = bom;
+	}
     private void Update()
     {
 		if (detector.IsDetected)
@@ -50,7 +57,11 @@ public class SelfBomb : MonoBehaviour
     {
 		if (!collision.gameObject.CompareTag("Terrain"))
         {
-			hero.TakeDamage (power.SetGetAttackPower);
+			if (collision.gameObject.CompareTag("Player")) 
+			{
+				hero.TakeDamage (power.SetGetAttackPower);
+				gameObject.GetComponent<AudioSource> ().Play();
+			}
 			defeatBonus.SetBonusActive = true;
 			defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));
             Destroy(gameObject);
