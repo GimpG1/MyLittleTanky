@@ -10,6 +10,8 @@ public class Warrior : MonoBehaviour
 	[SerializeField] ObjectsHP _warriorHP;
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
+	[SerializeField] ProjectileHandler _ammoControl;
+	[SerializeField] GameObject ammo;
 	#endregion
 
 
@@ -27,6 +29,7 @@ public class Warrior : MonoBehaviour
 			detector = gameObject.GetComponent<DetectPlayer> ();
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
+			_ammoControl = GameObject.Find ("ProjectileHandler").GetComponent<ProjectileHandler> ();
 
 			_warriorHP.SetGetHp = 100;
 		}
@@ -38,11 +41,13 @@ public class Warrior : MonoBehaviour
 		{
 			WarriorAttack (detector.HeroTransform);
 			_isDamaged.SetGetDamaged = false;
+			ammo =_ammoControl.Pull ();
+			ammo.transform.position = gameObject.transform.position;
 		}
 	}
 	private void WarriorAttack(Transform player)
 	{
-		
+		ammo.transform.position = player.transform.position;
 	}
 	public void TakeDamage(int damage)
 	{
