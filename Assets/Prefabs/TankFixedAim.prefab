@@ -560,7 +560,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1902415314809810}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.45, y: 2.35, z: 19.89}
+  m_LocalPosition: {x: 20.45, y: 1.28, z: 19.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4949585397051940}
@@ -1358,8 +1358,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.0750637, y: 1.3411307, z: 10.563455}
-  m_Center: {x: 0.48248768, y: -0.17056537, z: 0.32693052}
+  m_Size: {x: 6.0750637, y: 1.3411307, z: 8.527619}
+  m_Center: {x: 0.48248768, y: -0.17056537, z: -0.6909871}
 --- !u!114 &114008717652626980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1418,6 +1418,7 @@ MonoBehaviour:
   _tankHp: {fileID: 0}
   _tankFuel: {fileID: 0}
   _tankAmmo: {fileID: 0}
+  _tankMainPower: {fileID: 0}
   _itsPosition: 0
 --- !u!114 &114882527879165604
 MonoBehaviour:

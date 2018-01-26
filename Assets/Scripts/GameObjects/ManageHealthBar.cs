@@ -6,26 +6,26 @@ using UnityEngine.UI;
 public class ManageHealthBar : MonoBehaviour 
 {
 	[SerializeField] Slider _healthBar;
-	[SerializeField] Turrent _turrent;
+	[SerializeField] GameObject _objToHandle;
 	private int _currentHP;
 	private void Awake() 
 	{
-		if (_turrent == null) 
+		if (_objToHandle == null) 
 		{
-			_turrent = GameObject.Find ("Turret").GetComponent<Turrent> ();
+			_objToHandle = gameObject.GetComponent<GameObject> ();
 		}
 	}
 
 	private void Start ()
 	{
-		_healthBar.maxValue = _turrent.GetComponentInChildren<ObjectsHP>().SetGetHp;
-		_healthBar.value = _turrent.GetComponentInChildren<ObjectsHP>().SetGetHp;
-		CurrentHP = _turrent.GetComponentInChildren<ObjectsHP>().SetGetHp;
+		_healthBar.maxValue = _objToHandle.GetComponentInChildren<ObjectsHP>().SetGetHp;
+		_healthBar.value = _objToHandle.GetComponentInChildren<ObjectsHP>().SetGetHp;
+		CurrentHP = _objToHandle.GetComponentInChildren<ObjectsHP>().SetGetHp;
 	}
 	private void Update () 
 	{
-		if (_turrent.IsDamaged == true) {
-			_healthBar.value = _turrent.GetComponentInChildren<ObjectsHP>().SetGetHp;
+		if (_objToHandle.GetComponentInChildren<DamagedController>().SetGetDamaged == true) {
+			_healthBar.value = _objToHandle.GetComponentInChildren<ObjectsHP>().SetGetHp;
 		} 
 		else
 			return;

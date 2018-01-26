@@ -2,61 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turrent : MonoBehaviour 
+public class Warrior : MonoBehaviour 
 {
 	#region Private Variables
 	[SerializeField] HeroStats hero;
 	[SerializeField] DetectPlayer detector;
-	[SerializeField] ObjectsHP _turretHP;
+	[SerializeField] ObjectsHP _warriorHP;
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
-	private Vector3 _defPos;
 	#endregion
+
 
 	private void Awake()
 	{
 		if (hero == null ||
-			_turretHP == null ||
+			_warriorHP == null ||
 			detector == null ||
 			defeatBonus == null ||
 			_isDamaged == null)
 
 		{
 			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
-			_turretHP = gameObject.GetComponent<ObjectsHP> ();
+			_warriorHP = gameObject.GetComponent<ObjectsHP> ();
 			detector = gameObject.GetComponent<DetectPlayer> ();
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 
-			_turretHP.SetGetHp = 300;
+			_warriorHP.SetGetHp = 100;
 		}
 	}
 
-	private void Start()
-	{
-		_defPos = transform.position;
-	}
 	private void Update()
 	{
 		if (detector.IsDetected)
 		{
-			TurrentAttack (detector.HeroTransform);
-			transform.position = _defPos;
+			WarriorAttack (detector.HeroTransform);
 			_isDamaged.SetGetDamaged = false;
 		}
 	}
-
-	private void TurrentAttack(Transform player)
+	private void WarriorAttack(Transform player)
 	{
-		Vector3 direction = player.position - transform.position;
-		Quaternion lookRotation = Quaternion.LookRotation (direction);
-		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
-		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+		
 	}
-
 	public void TakeDamage(int damage)
 	{
-		_turretHP.SetGetHp -= damage;
+		_warriorHP.SetGetHp -= damage;
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -65,7 +55,7 @@ public class Turrent : MonoBehaviour
 		{
 			TakeDamage(hero.GetComponentInChildren<ObjectsAttackPOWER>().SetGetAttackPower);
 			_isDamaged.SetGetDamaged = true;
-			if (_turretHP.SetGetHp <= 0) 
+			if (_warriorHP.SetGetHp <= 0) 
 			{
 				defeatBonus.SetBonusActive = true;
 				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));

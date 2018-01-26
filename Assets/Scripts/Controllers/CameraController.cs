@@ -16,16 +16,7 @@ public class CameraController : MonoBehaviour
     {
         if (_MyHero == null)
         {
-            Debug.LogError("There is no connected game object\nTrying to get it via script");
-            try
-            {
-                _MyHero = GameObject.FindWithTag("Player");
-				Debug.LogWarning("Sucess");
-            }
-            catch (System.Exception)
-            {
-                Debug.Log("Get game object via script failed.");
-            }
+			_MyHero = GameObject.FindWithTag("Player");
         }
     }
 
