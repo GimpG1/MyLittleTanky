@@ -23,7 +23,6 @@ public class SetProjectile : MonoBehaviour
 		if (_lifeTime <= 0.0f)
 		{
 			_projectileHand.Push (gameObject);
-			Destroy (gameObject);
 		}
 	}
 
@@ -33,7 +32,6 @@ public class SetProjectile : MonoBehaviour
 		{
 			_hero.TakeDamage (_ammoPower.SetGetAttackPower);
 			_projectileHand.Push (gameObject);
-			Destroy (gameObject);
 		}
 	}
 }

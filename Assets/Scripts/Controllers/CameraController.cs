@@ -23,8 +23,8 @@ public class CameraController : MonoBehaviour
 	void LateUpdate ()
     {
         transform.LookAt(_MyHero.GetComponent<Transform>());
-        Vector3 desPoint = _MyHero.transform.position + _MyHero.transform.up * _cameraUpDistance - _MyHero.transform.forward * _cameraAwayDistance;
-        Vector3 endPosition = Vector3.Lerp(transform.position, desPoint, Time.deltaTime * _smoothCamera);
+        Vector3 desPoint = _MyHero.transform.position + _MyHero.transform.up * _cameraUpDistance - _MyHero.transform.forward * _cameraAwayDistance * Time.deltaTime;
+        Vector3 endPosition = Vector3.Lerp(transform.position, desPoint, _smoothCamera * Time.deltaTime );
         transform.position = endPosition;
     }
 }

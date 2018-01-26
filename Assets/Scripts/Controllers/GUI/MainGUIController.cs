@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class MainGUIController : MonoBehaviour
 {
-#region Private Variables
-    private Button _startBtn;
-    private Button _settingsBtn;
-    private Button _exitBtn;
-    private Button _backBtn;
+    #region Private Variables
+    [SerializeField] private Button _startBtn;
+    [SerializeField] private Button _settingsBtn;
+    [SerializeField] private Button _exitBtn;
+    [SerializeField] private Button _backBtn;
 
-    private Slider _soundSR;
-    private Slider _sfxSR;
+    [SerializeField] private Slider _soundSR;
+    [SerializeField] private Slider _sfxSR;
 
-    private Text _soundInfoTxt;
-    private Text _sfxInfoTxt;
+    [SerializeField] private Text _soundInfoTxt;
+    [SerializeField] private Text _sfxInfoTxt;
+
+    [SerializeField] private Camera _mainMenuCamera;
 
     [SerializeField] GameObject _menuCanvas;
     [SerializeField] SetGameCursor _setCur;
@@ -34,6 +36,9 @@ public class MainGUIController : MonoBehaviour
 
         _soundInfoTxt = GameObject.Find("SoundInfo").GetComponent<Text>();
         _sfxInfoTxt = GameObject.Find("SFXInfo").GetComponent<Text>();
+
+        _mainMenuCamera = GameObject.Find("MainMenuCamera").GetComponent<Camera>();
+        _mainMenuCamera.GetComponent<AudioListener>().enabled = false;
         _setCur.SetGuiCursor();
     }
 
@@ -42,7 +47,7 @@ public class MainGUIController : MonoBehaviour
         _backBtn.gameObject.SetActive(false);
         _soundSR.gameObject.SetActive(false);
         _sfxSR.gameObject.SetActive(false);
-
+        _mainMenuCamera.GetComponent<AudioListener>().enabled = true;
         _soundInfoTxt.gameObject.SetActive(false);
         _sfxInfoTxt.gameObject.SetActive(false);
         
@@ -51,7 +56,8 @@ public class MainGUIController : MonoBehaviour
     public void OnStartClick()
     {
         _setCur.SetInGameCursor();
-        Time.timeScale = 1f;
+        _mainMenuCamera.GetComponent<AudioListener>().enabled = false;
+        _mainMenuCamera.GetComponent<AudioSource>().Stop();
         SceneManager.LoadScene("PlaceHolder");
     }
 

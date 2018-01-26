@@ -9,7 +9,7 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	[SerializeField] ObjectsAttackPOWER _tankMainPower;
 	[SerializeField] DamagedController _isDamaged;
-	public float _itsPosition;
+	private float _itsPosition;
     private bool _isMoving = false;
 
 	private void Awake()

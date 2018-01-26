@@ -8,18 +8,22 @@ public class InGameGUIController : MonoBehaviour
 {
 
     #region Private Variables
-    private Button _backToGameBtn;
-    private Button _settingsBtn;
-    private Button _exitBtn;
-    private Button _backBtn;
+    [SerializeField] private Button _backToGameBtn;
+    [SerializeField] private Button _settingsBtn;
+    [SerializeField] private Button _exitBtn;
+    [SerializeField] private Button _backBtn;
 
-    private Slider _soundSR;
-    private Slider _sfxSR;
+    [SerializeField] private Slider _soundSR;
+    [SerializeField] private Slider _sfxSR;
 
-    private Text _soundInfoTxt;
-    private Text _sfxInfoTxt;
+    [SerializeField] private Text _soundInfoTxt;
+    [SerializeField] private Text _sfxInfoTxt;
 
-    private Canvas _inCanvas;
+    [SerializeField] private Canvas _inCanvas;
+    [SerializeField] private float defaultScale;
+
+    [SerializeField] private Camera _inGameCamera;
+
     [SerializeField] GameObject _menuCanvas;
     [SerializeField] SetGameCursor _setCur;
     #endregion
@@ -38,6 +42,14 @@ public class InGameGUIController : MonoBehaviour
 
         _inCanvas = gameObject.GetComponent<Canvas>();
         _inCanvas.enabled = false;
+
+        _inGameCamera = GameObject.Find("InGameCamera").GetComponent<Camera>();
+
+        defaultScale = Time.timeScale;
+    }
+    private void Update()
+    {
+        _inGameCamera.GetComponent<AudioListener>().enabled = true;
     }
     public void OnEscape()
     {
@@ -67,7 +79,7 @@ public class InGameGUIController : MonoBehaviour
     {
         _setCur.SetInGameCursor(); ;
         _inCanvas.enabled = false;
-        Time.timeScale = 1f;
+        Time.timeScale = defaultScale;
     }
     public void OnSettingsClick()
     {

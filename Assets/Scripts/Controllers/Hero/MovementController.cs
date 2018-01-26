@@ -6,6 +6,7 @@ public class MovementController : MonoBehaviour
 {
     // Tank base speed
     private float _tankSpeed = 10f;
+    private float _tankRotationSpeed = 50f;
     private InGameGUIController _inGameMenu;
     private HeroStats _heroStats;
 
@@ -51,11 +52,11 @@ public class MovementController : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.A))
             {
-                transform.Rotate(Vector3.down);
+                transform.Rotate(Vector3.down * Time.deltaTime * _tankRotationSpeed);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                transform.Rotate(Vector3.up);
+                transform.Rotate(Vector3.up * Time.deltaTime * _tankRotationSpeed);
             }
         }
         if (Input.GetKeyDown(KeyCode.Mouse0))

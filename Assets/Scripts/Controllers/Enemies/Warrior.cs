@@ -11,7 +11,6 @@ public class Warrior : MonoBehaviour
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
 	[SerializeField] ProjectileHandler _ammoControl;
-	//[SerializeField] GameObject ammo;
 	#endregion
 
 
@@ -41,10 +40,8 @@ public class Warrior : MonoBehaviour
 		{
 			WarriorAttack (detector.HeroTransform);
 			_isDamaged.SetGetDamaged = false;
-			var obj =  _ammoControl.Pull ();
-			obj.transform.position = new Vector3(transform.position.x + 1,transform.position.y + 1, transform.position.z);
-		}
-	}
+        }
+    }
 	private void WarriorAttack(Transform player)
 	{
 		Vector3 direction = player.position - transform.position;
@@ -52,8 +49,12 @@ public class Warrior : MonoBehaviour
 		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
 		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-		var obj = GameObject.Find ("Amunation").GetComponent<Transform> ();
-		obj.transform.position = Vector3.MoveTowards(transform.position, player.position, 5f * Time.deltaTime);
+        var obj = _ammoControl.Pull();
+        var objTR = obj.GetComponent<Transform>();
+
+        objTR.transform.position = new Vector3(transform.position.x + 1, transform.position.y + 1, transform.position.z);
+       
+        objTR.transform.position = Vector3.MoveTowards(transform.position, player.position, 5f * Time.deltaTime);
 	}
 
 	private void OnCollisionEnter(Collision collision)
@@ -66,7 +67,7 @@ public class Warrior : MonoBehaviour
 			if (_warriorHP.SetGetHp <= 0) 
 			{
 				defeatBonus.SetBonusActive = true;
-				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z + 1));
+				defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3, transform.position.y + 1, transform.position.z - 3));
 				gameObject.SetActive (false);
 			}
 		}

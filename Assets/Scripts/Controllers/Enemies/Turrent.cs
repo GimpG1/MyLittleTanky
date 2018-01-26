@@ -63,7 +63,7 @@ public class Turrent : MonoBehaviour
 			if (_turretHP.SetGetHp <= 0) 
 			{
 				defeatBonus.SetBonusActive = true;
-				defeatBonus.SpawnPlace (new Vector3(transform.position.x + 10,transform.position.y + 1, transform.position.z));
+				defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3,transform.position.y + 1, transform.position.z - 3));
 				Destroy(gameObject);
 			}
 		}

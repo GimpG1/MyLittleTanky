@@ -15,7 +15,7 @@ public class BonusController : MonoBehaviour
 		if (fuel == null) 
 		{
 			fuel = gameObject.GetComponent<ObjectsFUEL> ();
-			fuel.SetGetFuel = Random.Range (500, 1000);
+			fuel.SetGetFuel = Random.Range (100, 300);
 		}
 		if (ammo == null) 
 		{
