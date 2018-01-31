@@ -20,27 +20,18 @@ public class MovementController : MonoBehaviour
         
     }
 
-    private void CheckFuel()
+    private void Start()
     {
-		_itsFuel = _heroStats.GetComponentInChildren<ObjectsFUEL>().SetGetFuel;
-        if (_itsFuel > 0)
-        {
-            _hasFuel = true;
-        }
-		else if (_itsFuel < 1) 
-		{
-			_hasFuel = false;
-		}
+        _heroStats.IsEngineWork = false;
     }
-
-	private void LateUpdate()
+    private void LateUpdate()
 	{
 		CheckFuel ();
 	}
 
     private void Update()
     {
-        if (_hasFuel == true)
+        if (_hasFuel == true && _heroStats.IsEngineWork == true)
         {
             if (Input.GetKey(KeyCode.W))
             {
@@ -59,6 +50,10 @@ public class MovementController : MonoBehaviour
                 transform.Rotate(Vector3.up * Time.deltaTime * _tankRotationSpeed);
             }
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _heroStats.IsEngineWork = true;
+        }
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             
@@ -68,4 +63,18 @@ public class MovementController : MonoBehaviour
             _inGameMenu.OnEscape();
         }
     }
+
+    private void CheckFuel()
+    {
+        _itsFuel = _heroStats.GetComponentInChildren<ObjectsFUEL>().SetGetFuel;
+        if (_itsFuel > 0)
+        {
+            _hasFuel = true;
+        }
+        else if (_itsFuel < 1)
+        {
+            _hasFuel = false;
+        }
+    }
+
 }

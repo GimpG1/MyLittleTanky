@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
-	[SerializeField] ObjectsHP _tankHp;
+    #region Variables
+    [SerializeField] ObjectsHP _tankHp;
 	[SerializeField] ObjectsFUEL _tankFuel;
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	[SerializeField] ObjectsAttackPOWER _tankMainPower;
 	[SerializeField] DamagedController _isDamaged;
 	private float _itsPosition;
-    private bool _isMoving = false;
+    private bool _startEngine = false;
+    #endregion
 
-	private void Awake()
+    private void Awake()
     {
 		if (_tankHp == null ||
 			_tankFuel == null ||
@@ -39,13 +41,7 @@ public class HeroStats : MonoBehaviour
 
 	private void Update()
     {
-		if (_itsPosition > transform.position.x || _itsPosition < transform.position.x) {
-			IsMoving = true;
-		} 
-		else
-			IsMoving = false;
-		
-        if (_isMoving)
+        if (IsEngineWork)
         {
             LoseFuel(_tankFuel.SetGetFuel);
         }
@@ -78,15 +74,15 @@ public class HeroStats : MonoBehaviour
 		_tankHp.SetGetHp -= damage;
     }
 
-	public bool IsMoving
+	public bool IsEngineWork
 	{
 		get
 		{
-			return _isMoving;
+			return _startEngine;
 		}
 		set
-		{ 
-			_isMoving = value;
+		{
+            _startEngine = value;
 		}
 	}
 }

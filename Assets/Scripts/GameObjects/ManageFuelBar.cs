@@ -25,7 +25,7 @@ public class ManageFuelBar : MonoBehaviour
 	}
 	private void Update () 
 	{
-		if (_objToHandle.GetComponent<HeroStats>().IsMoving == true) {
+		if (_objToHandle.GetComponent<HeroStats>().IsEngineWork == true) {
 			_fuelBar.value = _objToHandle.GetComponentInChildren<ObjectsFUEL>().SetGetFuel;
 			} 
 			else
