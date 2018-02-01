@@ -8,6 +8,7 @@ public class Warrior : MonoBehaviour
 	[SerializeField] HeroStats hero;
 	[SerializeField] DetectPlayer detector;
 	[SerializeField] ObjectsHP _warriorHP;
+	[SerializeField] AmmoForcePOWER _warriorAmmoForce;
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
 	[SerializeField] AmmunationController _controlAmmo;
@@ -20,7 +21,8 @@ public class Warrior : MonoBehaviour
 			_warriorHP == null ||
 			detector == null ||
 			defeatBonus == null ||
-			_isDamaged == null)
+			_isDamaged == null ||
+			_warriorAmmoForce == null)
 
 		{
 			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
@@ -29,7 +31,10 @@ public class Warrior : MonoBehaviour
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 			_controlAmmo = gameObject.GetComponentInChildren<AmmunationController> ();
+			_warriorAmmoForce = gameObject.GetComponent<AmmoForcePOWER> ();
+
 			_warriorHP.SetGetHp = 100;
+			_warriorAmmoForce.SetGetAmmoPower = 600f;
 		}
 	}
 
@@ -48,7 +53,7 @@ public class Warrior : MonoBehaviour
 		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
 		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-		_controlAmmo.TakeAction ();
+		_controlAmmo.TakeAction (_warriorAmmoForce.SetGetAmmoPower);
 	}
 
 	private void OnCollisionEnter(Collision collision)

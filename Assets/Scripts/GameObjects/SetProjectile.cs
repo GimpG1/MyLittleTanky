@@ -16,7 +16,7 @@ public class SetProjectile : MonoBehaviour
 		_ammoPower = gameObject.GetComponent<ObjectsAttackPOWER>();
 		_projectileHand = GameObject.Find ("ProjectileHandler").GetComponent<ProjectileHandler> ();
 		_hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
-		_ammoPower.SetGetAttackPower = 2;
+		_ammoPower.SetGetAttackPower = 20;
 	}
 
 	private void Update()
@@ -24,7 +24,7 @@ public class SetProjectile : MonoBehaviour
 		if (_targetReached == false)
         {
             _lifeTime -= Time.deltaTime;
-            if (_lifeTime <= 0.0f)
+            if (_lifeTime < 1f)
             {
                 _projectileHand.Push(gameObject);
             }

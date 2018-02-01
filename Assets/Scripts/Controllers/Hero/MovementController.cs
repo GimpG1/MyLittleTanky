@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    // Tank base speed
+	#region Private Variables
     private float _tankSpeed = 10f;
     private float _tankRotationSpeed = 50f;
-    private InGameGUIController _inGameMenu;
-    private HeroStats _heroStats;
+	[SerializeField] private InGameGUIController _inGameMenu;
+	[SerializeField] private HeroStats _heroStats;
+	[SerializeField] Transform _tankAim;
+	[SerializeField] Transform _tankTower;
+	private float mouseXPos;
+	private float mouseYPos;
 
     private bool _hasFuel = true;
     private float _itsFuel;
-
+	#endregion
     private void Awake()
     {
         _inGameMenu = GameObject.Find("InGameCanvas").GetComponent<InGameGUIController>();
@@ -31,6 +35,9 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
+		mouseXPos = Input.mousePosition.x;
+		mouseYPos = Input.mousePosition.y;
+
         if (_hasFuel == true && _heroStats.IsEngineWork == true)
         {
             if (Input.GetKey(KeyCode.W))
@@ -50,6 +57,25 @@ public class MovementController : MonoBehaviour
                 transform.Rotate(Vector3.up * Time.deltaTime * _tankRotationSpeed);
             }
         }
+		if (mouseXPos >= 500) 
+		{
+			_tankTower.transform.Rotate (Vector3.forward * Time.deltaTime * _tankRotationSpeed);
+		}
+
+		if (mouseXPos <= 500) 
+		{
+			_tankTower.transform.Rotate (Vector3.back * Time.deltaTime * _tankRotationSpeed);
+		}
+		/*
+		if(mouseYPos)
+		{
+			_tankAim.transform.Rotate (Vector3.left);
+		}
+		if(mouseYPos)
+		{
+			_tankAim.transform.Rotate (Vector3.right);
+		}
+		*/
         if (Input.GetKeyDown(KeyCode.X))
         {
             _heroStats.IsEngineWork = true;

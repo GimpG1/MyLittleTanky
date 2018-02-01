@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] GameObject _MyHero;
     // Less smooth is better
     //private float _smoothCamera = 1f;
-    private float _cameraUpDistance = 12f;
+    private float _cameraUpDistance = 8f;
     private float _cameraAwayDistance = 15f;
 
 	private float camXpos;

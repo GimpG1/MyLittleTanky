@@ -10,6 +10,8 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	[SerializeField] ObjectsAttackPOWER _tankMainPower;
 	[SerializeField] DamagedController _isDamaged;
+
+	[SerializeField] private AudioSource _tankMoveSound;
     private bool _startEngine = false;
     #endregion
 
@@ -35,7 +37,7 @@ public class HeroStats : MonoBehaviour
 
 	private void Start()
 	{
-		//_itsPosition = transform.position.x;
+		_tankMoveSound.Stop ();
 	}
 
 	private void Update()
@@ -43,6 +45,8 @@ public class HeroStats : MonoBehaviour
         if (IsEngineWork)
         {
             LoseFuel(_tankFuel.SetGetFuel);
+			PlayMovementSound ();
+
         }
 		SetDamaged (_tankHp.SetGetHp);
 		if (_tankHp.SetGetHp <= 0) 
@@ -50,6 +54,15 @@ public class HeroStats : MonoBehaviour
 			gameObject.SetActive (false);
 		}
     }
+	private void PlayMovementSound()
+	{
+		if (_tankMoveSound.isPlaying == true) 
+		{
+			_tankMoveSound.Stop ();
+		}
+		else
+			_tankMoveSound.Play ();
+	}
 
 	private void LoseFuel(int fuel)
 	{
