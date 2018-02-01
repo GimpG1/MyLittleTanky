@@ -9,12 +9,9 @@ public class MovementController : MonoBehaviour
     private float _tankRotationSpeed = 50f;
 	[SerializeField] private InGameGUIController _inGameMenu;
 	[SerializeField] private HeroStats _heroStats;
-	[SerializeField] Transform _tankAim;
-	[SerializeField] Transform _tankTower;
-	private float mouseXPos;
-	private float mouseYPos;
 
     private bool _hasFuel = true;
+	private bool _startEngine = false;
     private float _itsFuel;
 	#endregion
     private void Awake()
@@ -35,9 +32,6 @@ public class MovementController : MonoBehaviour
 
     private void Update()
     {
-		mouseXPos = Input.mousePosition.x;
-		mouseYPos = Input.mousePosition.y;
-
         if (_hasFuel == true && _heroStats.IsEngineWork == true)
         {
             if (Input.GetKey(KeyCode.W))
@@ -57,37 +51,31 @@ public class MovementController : MonoBehaviour
                 transform.Rotate(Vector3.up * Time.deltaTime * _tankRotationSpeed);
             }
         }
-		if (mouseXPos >= 500) 
-		{
-			_tankTower.transform.Rotate (Vector3.forward * Time.deltaTime * _tankRotationSpeed);
-		}
-
-		if (mouseXPos <= 500) 
-		{
-			_tankTower.transform.Rotate (Vector3.back * Time.deltaTime * _tankRotationSpeed);
-		}
-		/*
-		if(mouseYPos)
-		{
-			_tankAim.transform.Rotate (Vector3.left);
-		}
-		if(mouseYPos)
-		{
-			_tankAim.transform.Rotate (Vector3.right);
-		}
-		*/
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && !_startEngine)
         {
             _heroStats.IsEngineWork = true;
+			this._startEngine = true;
         }
+		else if (Input.GetKeyDown(KeyCode.X) && _startEngine)
+		{
+			_heroStats.IsEngineWork = false;
+			this._startEngine = false;
+		}
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) && _startEngine)
         {
             _inGameMenu.OnEscape();
+			_heroStats.IsEngineWork = false;
+			this._startEngine = false;
         }
+		else if (Input.GetKeyDown(KeyCode.Escape) && !_startEngine) 
+		{
+			_heroStats.IsEngineWork = false;
+			this._startEngine = false;
+		}
     }
 
     private void CheckFuel()
