@@ -10,7 +10,6 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] ObjectsAMMUNATION _tankAmmo;
 	[SerializeField] ObjectsAttackPOWER _tankMainPower;
 	[SerializeField] DamagedController _isDamaged;
-	private float _itsPosition;
     private bool _startEngine = false;
     #endregion
 
@@ -27,7 +26,7 @@ public class HeroStats : MonoBehaviour
 			_tankMainPower = gameObject.GetComponent<ObjectsAttackPOWER> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 
-			_tankHp.SetGetHp = 100;
+			_tankHp.SetGetHp = 1000;
 			_tankFuel.SetGetFuel = 1000;
 			_tankAmmo.SetGetAmmunation = 5;
 			_tankMainPower.SetGetAttackPower = 50;
@@ -36,7 +35,7 @@ public class HeroStats : MonoBehaviour
 
 	private void Start()
 	{
-		_itsPosition = transform.position.x;
+		//_itsPosition = transform.position.x;
 	}
 
 	private void Update()

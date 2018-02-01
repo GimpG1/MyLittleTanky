@@ -12,7 +12,7 @@ public class DetectPlayer : MonoBehaviour
 		transform.LookAt(_playerTransform);
 	}
 
-	private void OnTriggerStay(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
@@ -46,7 +46,7 @@ public class DetectPlayer : MonoBehaviour
 		{ 
 			if (_playerTransform == null)
 			{
-				_playerTransform = GameObject.Find("HeroTank").GetComponent<Transform>();
+				_playerTransform = GameObject.Find("Tanky").GetComponent<Transform>();
 			}
 		}
 	}

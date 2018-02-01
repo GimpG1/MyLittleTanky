@@ -24,7 +24,7 @@ public class BonusController : MonoBehaviour
 		}
 		if (hero == null)
 		{
-			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
+			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
 		}
 	}
 

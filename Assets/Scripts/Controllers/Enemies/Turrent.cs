@@ -22,7 +22,7 @@ public class Turrent : MonoBehaviour
 			_isDamaged == null)
 
 		{
-			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
+			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
 			_turretHP = gameObject.GetComponent<ObjectsHP> ();
 			detector = gameObject.GetComponent<DetectPlayer> ();
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();

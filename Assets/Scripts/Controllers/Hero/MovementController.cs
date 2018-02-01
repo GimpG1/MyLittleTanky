@@ -16,7 +16,7 @@ public class MovementController : MonoBehaviour
     private void Awake()
     {
         _inGameMenu = GameObject.Find("InGameCanvas").GetComponent<InGameGUIController>();
-        _heroStats = GameObject.Find("HeroTank").GetComponent<HeroStats>();
+        _heroStats = GameObject.Find("Tanky").GetComponent<HeroStats>();
         
     }
 

@@ -17,7 +17,7 @@ public class SelfBomb : MonoBehaviour
     {
 		if (hero == null)
 		{
-			hero = GameObject.Find("HeroTank").GetComponent<HeroStats>();
+			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
 		}
 		if (power == null) 
 		{
