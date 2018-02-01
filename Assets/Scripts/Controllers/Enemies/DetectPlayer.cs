@@ -21,11 +21,12 @@ public class DetectPlayer : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerLeave(Collider other)
+	private void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
 			this._playerDetected = false;
+			HeroTransform = null;
 		}
 	}
 	public bool IsDetected

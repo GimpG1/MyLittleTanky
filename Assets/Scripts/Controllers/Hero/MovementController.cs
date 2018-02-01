@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     private float _tankRotationSpeed = 50f;
 	[SerializeField] private InGameGUIController _inGameMenu;
 	[SerializeField] private HeroStats _heroStats;
+	[SerializeField] private TankAttack _att;
 
     private bool _hasFuel = true;
 	private bool _startEngine = false;
@@ -18,7 +19,7 @@ public class MovementController : MonoBehaviour
     {
         _inGameMenu = GameObject.Find("InGameCanvas").GetComponent<InGameGUIController>();
         _heroStats = GameObject.Find("Tanky").GetComponent<HeroStats>();
-        
+		_att = GameObject.Find ("SpawnAmmo").GetComponent<TankAttack> ();    
     }
 
     private void Start()
@@ -63,9 +64,9 @@ public class MovementController : MonoBehaviour
 		}
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            
+			_att.TakeAction (3000f);
         }
-		if (Input.GetKeyDown(KeyCode.Escape) && _startEngine)
+		if (Input.GetKeyDown(KeyCode.Escape))
         {
             _inGameMenu.OnEscape();
 			_heroStats.IsEngineWork = false;

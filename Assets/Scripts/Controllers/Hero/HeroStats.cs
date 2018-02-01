@@ -29,10 +29,9 @@ public class HeroStats : MonoBehaviour
 			_tankAmmo = gameObject.GetComponent<ObjectsAMMUNATION> ();
 			_tankMainPower = gameObject.GetComponent<ObjectsAttackPOWER> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
-			_endGame = gameObject.GetComponent<EndGameController> ();
 
 			_tankHp.SetGetHp = 1000;
-			_tankFuel.SetGetFuel = 20;
+			_tankFuel.SetGetFuel = 300;
 			_tankAmmo.SetGetAmmunation = 5;
 			_tankMainPower.SetGetAttackPower = 50;
 		}
@@ -46,7 +45,7 @@ public class HeroStats : MonoBehaviour
 			PlayMovementSound (IsEngineWork);
         }
 		SetDamaged (_tankHp.SetGetHp);
-		if (_tankHp.SetGetHp <= 0) 
+		if (_tankHp.SetGetHp <= 1) 
 		{
 			_endGame.ShowEndMessage ();
 			gameObject.SetActive (false);

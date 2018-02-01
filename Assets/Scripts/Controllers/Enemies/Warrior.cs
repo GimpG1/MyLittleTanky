@@ -12,6 +12,7 @@ public class Warrior : MonoBehaviour
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
 	[SerializeField] AmmunationController _controlAmmo;
+	[SerializeField] Vector3 _defaultPos;
 	#endregion
 
 
@@ -32,7 +33,7 @@ public class Warrior : MonoBehaviour
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 			_controlAmmo = gameObject.GetComponentInChildren<AmmunationController> ();
 			_warriorAmmoForce = gameObject.GetComponent<AmmoForcePOWER> ();
-
+			_defaultPos = gameObject.transform.position;
 			_warriorHP.SetGetHp = 100;
 			_warriorAmmoForce.SetGetAmmoPower = 600f;
 		}
@@ -46,14 +47,16 @@ public class Warrior : MonoBehaviour
 			_isDamaged.SetGetDamaged = false;
         }
     }
+
 	private void WarriorAttack(Transform player)
 	{
-		Vector3 direction = player.position - transform.position;
-		Quaternion lookRotation = Quaternion.LookRotation (direction);
-		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, 3f* Time.deltaTime).eulerAngles;
-		transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-		_controlAmmo.TakeAction (_warriorAmmoForce.SetGetAmmoPower);
+		if (player != null) {
+			Vector3 direction = player.position - transform.position;
+			Quaternion lookRotation = Quaternion.LookRotation (direction);
+			Vector3 rotation = Quaternion.Lerp (transform.rotation, lookRotation, 3f * Time.deltaTime).eulerAngles;
+			transform.rotation = Quaternion.Euler (0f, rotation.y, 0f);_controlAmmo.TakeAction (_warriorAmmoForce.SetGetAmmoPower);
+		} else
+			transform.position = _defaultPos;
 	}
 
 	private void OnCollisionEnter(Collision collision)

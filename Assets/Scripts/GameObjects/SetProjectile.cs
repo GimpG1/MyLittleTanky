@@ -41,6 +41,7 @@ public class SetProjectile : MonoBehaviour
 		else  
 		{
 			this._targetReached = false;
+			_projectileHand.Push(gameObject);
 		}
             
 	}

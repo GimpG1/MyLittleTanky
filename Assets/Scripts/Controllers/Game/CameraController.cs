@@ -6,25 +6,26 @@ public class CameraController : MonoBehaviour
 {
 #region Private Variables
     [SerializeField] GameObject _MyHero;
-    // Less smooth is better
-    //private float _smoothCamera = 1f;
     private float _cameraUpDistance = 8f;
     private float _cameraAwayDistance = 15f;
+	[SerializeField] AudioClip[] backgroundSounds;
+	private AudioSource _source;
 
 	private float camXpos;
 	private float camYpos;
 	private float camZpos;
     #endregion
-    void Start ()
+	private void Start ()
     {
         if (_MyHero == null)
         {
 			_MyHero = GameObject.FindWithTag("Player");
         }
-
+		_source = gameObject.GetComponent<AudioSource> ();
+		_source.Stop ();
     }
 
-	void Update ()
+	private void Update ()
     {
 		camXpos = _MyHero.transform.position.x;
 		camYpos = _MyHero.transform.position.y + _cameraUpDistance;
@@ -33,10 +34,11 @@ public class CameraController : MonoBehaviour
         transform.LookAt(_MyHero.GetComponent<Transform>());
 		Vector3 endPos = new Vector3 (camXpos,camYpos,camZpos);
 		transform.position = endPos;
-		/*
-		Vector3 desPoint = _MyHero.transform.position + _MyHero.transform.up * _cameraUpDistance - _MyHero.transform.forward * _cameraAwayDistance * Time.deltaTime;
-		Vector3 endPosition = Vector3.Lerp(transform.position, desPoint, _smoothCamera * Time.deltaTime );
-		transform.position = endPosition;
-		*/
     }
+
+	public void ChangeGroundSound(int soundIndex)
+	{
+		_source.clip = backgroundSounds[soundIndex];
+		_source.Play ();
+	}
 }

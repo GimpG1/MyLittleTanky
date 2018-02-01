@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1073685466832744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 44.7, y: 0.459, z: 54.45}
+  m_LocalPosition: {x: 61.83, y: 0.459, z: 85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -112,7 +112,8 @@ AudioSource:
   m_GameObject: {fileID: 1073685466832744}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243004872989670106, guid: ee64f18125a8e9f449845b59b450840c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ddc944a00385eb14f8e1a19311c6a82e, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -123,10 +124,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 3.54
-  MinDistance: 5
+  MinDistance: 10
   MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -200,7 +201,8 @@ MonoBehaviour:
   detector: {fileID: 0}
   power: {fileID: 0}
   defeatBonus: {fileID: 0}
-  bom: {fileID: 8300000, guid: ddc944a00385eb14f8e1a19311c6a82e, type: 3}
+  _bomSource: {fileID: 0}
+  _bomClip: {fileID: 0}
 --- !u!114 &114215313319645330
 MonoBehaviour:
   m_ObjectHideFlags: 1

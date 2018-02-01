@@ -27,6 +27,7 @@ public class ProjectileHandler : MonoBehaviour
 			return inPool;
 		}
 		inPool = Instantiate (_ammoPrefab);
+		Destroy (inPool, 5f);
 		return inPool;
 	}
 	// oddaj

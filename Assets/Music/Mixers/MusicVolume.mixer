@@ -10,11 +10,20 @@ AudioMixerController:
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
+  - {fileID: 245151053137618934}
+  - {fileID: 245137686157316940}
+  - {fileID: 245811645283345548}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: f570164a776dc7147b171e1beee35068
+    name: Master
+  - guid: aa44d4775fba48343afc5d4d41828062
+    name: MusVol
+  - guid: a1b8d18ac47383f41b15572bdca84b24
+    name: SfxVol
   m_AudioMixerGroupViews:
   - guids:
     - d918dac63e25cdf42aa1be3f282c2c18
@@ -60,11 +69,13 @@ AudioMixerSnapshotController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Snapshot
+  m_Name: Main
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 0819ee5fa56f4a04c99ede2e557cdf12
   m_FloatValues:
-    f570164a776dc7147b171e1beee35068: 20
+    aa44d4775fba48343afc5d4d41828062: -0.08374829
+    f570164a776dc7147b171e1beee35068: 0.025578512
+    a1b8d18ac47383f41b15572bdca84b24: 0.025578512
   m_TransitionOverrides: {}
 --- !u!243 &243004872989670106
 AudioMixerGroupController:
@@ -88,7 +99,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MusicVolume
+  m_Name: MusVolume
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 39db5f6a80f52264bbc873a12ca090b4
   m_Children: []
@@ -126,3 +137,42 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &245137686157316940
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Forest
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 15847dd0d01409f488bf8a8aa9053d03
+  m_FloatValues:
+    aa44d4775fba48343afc5d4d41828062: -0.08374829
+    f570164a776dc7147b171e1beee35068: 0.025578512
+    a1b8d18ac47383f41b15572bdca84b24: 0.025578512
+  m_TransitionOverrides: {}
+--- !u!245 &245151053137618934
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Oaza
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 17cbb2f63f666274c8ae656974084324
+  m_FloatValues:
+    aa44d4775fba48343afc5d4d41828062: -0.08374829
+    f570164a776dc7147b171e1beee35068: 0.025578512
+    a1b8d18ac47383f41b15572bdca84b24: 0.025578512
+  m_TransitionOverrides: {}
+--- !u!245 &245811645283345548
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Desert
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: bd1bbff65e290f94aab1a49de44cce25
+  m_FloatValues:
+    aa44d4775fba48343afc5d4d41828062: -0.08374829
+    f570164a776dc7147b171e1beee35068: 0.025578512
+    a1b8d18ac47383f41b15572bdca84b24: 0.025578512
+  m_TransitionOverrides: {}
