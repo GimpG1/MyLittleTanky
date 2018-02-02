@@ -2,23 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class HeroTowerController : MonoBehaviour 
 {
 	[SerializeField] Transform _tankAim;
 	[SerializeField] Transform _tankTower;
-	[SerializeField] MousePosition _mousePos;
+	[SerializeField] Transform _tank;
 
-	private float _rotateSpeed = 15f;
-	private float _aimSpeed = 5f;
-	private Transform _mouse;
+	//private float _rotateSpeed = 15f;
+	//private float _aimSpeed = 5f;
+
+	//private float minAimAngle = -105f;
+	//private float maxAimAngle = -70f;
+
+	private Vector3 _towerDefaultRotate;
 
 	private void Update()
 	{
-		_mouse = _mousePos.GetMouseTransform;
-		Vector3 direction = _mouse.transform.position - _tankTower.transform.position;
-		Quaternion lookRotation = Quaternion.LookRotation (direction);
-		Vector3 rotation = Quaternion.Lerp (_tankTower.transform.rotation, lookRotation, 3f * Time.deltaTime).eulerAngles;
-		_tankTower.transform.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+		_towerDefaultRotate = new Vector3(-90f, 0f, 90f);
+
+		float towerZRotation = _tankTower.transform.rotation.z *Time.deltaTime;
 
 	}
-}

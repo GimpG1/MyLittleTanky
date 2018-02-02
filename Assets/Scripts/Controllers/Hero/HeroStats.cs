@@ -31,7 +31,7 @@ public class HeroStats : MonoBehaviour
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 
 			_tankHp.SetGetHp = 1000;
-			_tankFuel.SetGetFuel = 300;
+			_tankFuel.SetGetFuel = 3000;
 			_tankAmmo.SetGetAmmunation = 5;
 			_tankMainPower.SetGetAttackPower = 50;
 		}
