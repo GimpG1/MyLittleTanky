@@ -2389,9 +2389,10 @@ MonoBehaviour:
   _towerController: {fileID: 305447928}
   backgroundSounds:
   - {fileID: 8300000, guid: d8280c4988bda93408a20b0c19f1bb9d, type: 3}
-  - {fileID: 8300000, guid: 9b48ebce34ba2b742a86675e6152d6ef, type: 3}
-  - {fileID: 8300000, guid: ddc944a00385eb14f8e1a19311c6a82e, type: 3}
-  - {fileID: 8300000, guid: d761371ee1b6b364daf4250b45e9a56e, type: 3}
+  - {fileID: 8300000, guid: e7b5ad44dbf63fa4da52f1df6fbd74a6, type: 3}
+  - {fileID: 8300000, guid: 7cd1af913db1aed4590d43d5e29a289e, type: 3}
+  - {fileID: 8300000, guid: 6a9f4e9006a800b4cac84a698cb9f4dd, type: 3}
+  - {fileID: 8300000, guid: 8347814c7b71abb43ab8c9e312acca8a, type: 3}
 --- !u!82 &691676629
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2402,8 +2403,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243332938159684608, guid: ee64f18125a8e9f449845b59b450840c,
     type: 2}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: e7b5ad44dbf63fa4da52f1df6fbd74a6, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

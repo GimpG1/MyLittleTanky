@@ -18,6 +18,9 @@ public class CameraController : MonoBehaviour
 	private float _camUpDist = 3f;
 	private float _camBackDist = 10f;
     private float _camDistFromTarget = 0f;
+    // Sound Control
+    private int _playSoundAt = 0;
+    private bool _isPlayingActually = false;
     #endregion
 
 	private void Start ()
@@ -28,6 +31,8 @@ public class CameraController : MonoBehaviour
         }
 		_source = gameObject.GetComponent<AudioSource> ();
 		_source.Stop ();
+        _playSoundAt = Random.Range(0, 5);
+        ChangeBackGroundSound(_playSoundAt);
     }
 
 	private void Update()
@@ -48,10 +53,21 @@ public class CameraController : MonoBehaviour
 		// Summary
 		//transform.position = endPos;
 		transform.RotateAround (_lookAtHero.transform.position, Vector3.up, _towerController.GetSetTowerAngle * _camDistFromTarget);
-		//transform.localRotation = Quaternion.Slerp (actualRotation , lookAtRotation, 1f * Time.deltaTime);
+        //transform.localRotation = Quaternion.Slerp (actualRotation , lookAtRotation, 1f * Time.deltaTime);
+
+        if (!_source.isPlaying)
+        {
+            this._isPlayingActually = true;
+        }
+        if (_isPlayingActually)
+        {
+            _playSoundAt = Random.Range(0, 5);
+            ChangeBackGroundSound(_playSoundAt);
+            this._isPlayingActually = false;
+        }
 	}
 
-	public void ChangeGroundSound(int soundIndex)
+	public void ChangeBackGroundSound(int soundIndex)
 	{
 		_source.clip = backgroundSounds[soundIndex];
 		_source.Play ();

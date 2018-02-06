@@ -15,6 +15,6 @@ public class SoundAreasController : MonoBehaviour
 
 	private void Update()
 	{
-		_myCamAudio.ChangeGroundSound (0);
+		//_myCamAudio.ChangeGroundSound (0);
 	}
 }
