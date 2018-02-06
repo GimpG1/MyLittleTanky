@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
 #region Private Variables
 	[SerializeField] Transform _lookAtHero;//M/
 	[SerializeField] Transform _heroFollow;//M/
+    [SerializeField] HeroTowerController _towerController;
     [SerializeField] AudioClip[] backgroundSounds;
 	private AudioSource _source;
 
@@ -42,14 +43,15 @@ public class CameraController : MonoBehaviour
 									  _heroFollow.transform.position.y + _camUpDist,
 									  _heroFollow.transform.position.z - _camBackDist);
 		
-		// Rotate camera at tower rotate
+		/* Rotate camera at tower rotate
 		_cameraOffset = (_lookAtHero.transform.position + new Vector3(0f, _camUpDist, 0f) - transform.position);
 		Quaternion lookAtRotation = Quaternion.LookRotation (_cameraOffset);
 		Quaternion actualRotation = transform.localRotation;
-
+		*/
 		// Summary
 		transform.position = endPos;
-		transform.localRotation = Quaternion.Slerp (actualRotation , lookAtRotation, 1f * Time.deltaTime);
+		transform.RotateAround (_lookAtHero.transform.position, Vector3.up, _towerController.GetSetTowerAngle);
+		//transform.localRotation = Quaternion.Slerp (actualRotation , lookAtRotation, 1f * Time.deltaTime);
 	}
 
 	public void ChangeGroundSound(int soundIndex)
