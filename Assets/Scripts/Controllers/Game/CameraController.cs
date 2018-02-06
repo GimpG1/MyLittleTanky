@@ -11,17 +11,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] HeroTowerController _towerController;
     [SerializeField] AudioClip[] backgroundSounds;
 	private AudioSource _source;
-
-	//private Vector3 _mousePos;
+    
 	private Vector3 _camStartPos;
-	private Vector3 _cameraOffset;
-
-	//private RaycastHit _hitTarget;
-	//private Ray _mainCamRay;
-
+	//private Vector3 _cameraOffset;
+   
 	private float _camUpDist = 3f;
 	private float _camBackDist = 10f;
-	//private float _maxRayDistance = 100f;
+    private float _camDistFromTarget = 0f;
     #endregion
 
 	private void Start ()
@@ -30,13 +26,14 @@ public class CameraController : MonoBehaviour
         {
 			_lookAtHero = GameObject.FindWithTag("Player").GetComponent<Transform>();
         }
-		//_mainCamRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 		_source = gameObject.GetComponent<AudioSource> ();
 		_source.Stop ();
     }
 
 	private void Update()
 	{
+        _camDistFromTarget = Vector3.Distance(transform.position, _heroFollow.transform.position);
+
 		// Camera follow player
 		transform.LookAt(_heroFollow);
 		Vector3 endPos = new Vector3 (_heroFollow.transform.position.x ,
@@ -49,8 +46,8 @@ public class CameraController : MonoBehaviour
 		Quaternion actualRotation = transform.localRotation;
 		*/
 		// Summary
-		transform.position = endPos;
-		transform.RotateAround (_lookAtHero.transform.position, Vector3.up, _towerController.GetSetTowerAngle);
+		//transform.position = endPos;
+		transform.RotateAround (_lookAtHero.transform.position, Vector3.up, _towerController.GetSetTowerAngle * _camDistFromTarget);
 		//transform.localRotation = Quaternion.Slerp (actualRotation , lookAtRotation, 1f * Time.deltaTime);
 	}
 
