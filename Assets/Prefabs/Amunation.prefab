@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114358010141624092}
   - component: {fileID: 54592126327349006}
   - component: {fileID: 82313500221897762}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Amunation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
