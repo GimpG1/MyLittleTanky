@@ -61,7 +61,10 @@ public class SelfBomb : MonoBehaviour
 			}
 			defeatBonus.SetBonusActive = true;
 			defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3, transform.position.y + 1, transform.position.z - 3));
-			_bomSource.Play ();
+            if (_bomSource.isPlaying == false)
+            {
+                _bomSource.Play();
+            }
 			Destroy(gameObject);
         }
     }

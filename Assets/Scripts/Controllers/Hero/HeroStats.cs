@@ -13,6 +13,7 @@ public class HeroStats : MonoBehaviour
 	[SerializeField] EndGameController _endGame;
 
 	[SerializeField] private AudioSource _tankMoveSound;
+    [SerializeField] private AudioClip _tankClip;
     private bool _startEngine = false;
     #endregion
 
@@ -36,34 +37,52 @@ public class HeroStats : MonoBehaviour
 			_tankMainPower.SetGetAttackPower = 50;
 		}
     }
-
-	private void Update()
+    private void Start()
+    {
+        _tankMoveSound = gameObject.GetComponent<AudioSource>();
+        _tankMoveSound.Stop();
+    }
+    private void Update()
     {
         if (IsEngineWork)
         {
             LoseFuel(_tankFuel.SetGetFuel);
-			PlayMovementSound (IsEngineWork);
+            PlayMovementSound();
         }
-		SetDamaged (_tankHp.SetGetHp);
+        else if (!IsEngineWork)
+        {
+            StopPlayingSound();
+        }
+        SetDamaged (_tankHp.SetGetHp);
+
 		if (_tankHp.SetGetHp <= 1) 
 		{
 			_endGame.ShowEndMessage ();
 			gameObject.SetActive (false);
+            StopPlayingSound();
 		} 
 		else if (_tankFuel.SetGetFuel <= 0f) 
 		{
 			_endGame.ShowEndMessage ();
-		}
+            StopPlayingSound();
+        }
     }
-	private void PlayMovementSound(bool play)
-	{
-		if (play) 
-		{
-			_tankMoveSound.clip = gameObject.GetComponent<AudioClip> ();
-			_tankMoveSound.Play ();
-		}
-	}
+    private void PlayMovementSound()
+    {
+        _tankMoveSound.clip = _tankClip;
+        if (_tankMoveSound.isPlaying == false)
+        {
+            _tankMoveSound.Play();
+        }
+    }
 
+    private void StopPlayingSound()
+    {
+        if (_tankMoveSound.isPlaying == true)
+        {
+            _tankMoveSound.Stop();
+        }
+    }
 	private void LoseFuel(int fuel)
 	{
 		if (_tankFuel.SetGetFuel > 0f) 
