@@ -7,9 +7,9 @@ public class SetGameCursor : MonoBehaviour {
     public Texture2D _tankDative;
     public Texture2D _guiDative;
 
-    void Start ()
+   public void ShowCursor (bool value)
     {
-        Cursor.visible = true;
+        Cursor.visible = value;
 	}
 
     public void SetGuiCursor()

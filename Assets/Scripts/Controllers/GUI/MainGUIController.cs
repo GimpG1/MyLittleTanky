@@ -19,6 +19,7 @@ public class MainGUIController : MonoBehaviour
     [SerializeField] private Text _sfxInfoTxt;
 
     [SerializeField] private Camera _mainMenuCamera;
+    [SerializeField] private float defaultScale;
 
     [SerializeField] GameObject _menuCanvas;
     [SerializeField] SetGameCursor _setCur;
@@ -39,7 +40,9 @@ public class MainGUIController : MonoBehaviour
 
         _mainMenuCamera = GameObject.Find("MainMenuCamera").GetComponent<Camera>();
         _mainMenuCamera.GetComponent<AudioListener>().enabled = false;
+        _setCur.ShowCursor(true);
         _setCur.SetGuiCursor();
+        defaultScale = Time.timeScale;
     }
 
     private void Start()
@@ -50,14 +53,14 @@ public class MainGUIController : MonoBehaviour
         _mainMenuCamera.GetComponent<AudioListener>().enabled = true;
         _soundInfoTxt.gameObject.SetActive(false);
         _sfxInfoTxt.gameObject.SetActive(false);
-        
     }
 
     public void OnStartClick()
     {
-        _setCur.SetInGameCursor();
         _mainMenuCamera.GetComponent<AudioListener>().enabled = false;
         _mainMenuCamera.GetComponent<AudioSource>().Stop();
+        Time.timeScale = defaultScale;
+        _setCur.ShowCursor(false);
         SceneManager.LoadScene("PlaceHolder");
     }
 

@@ -57,6 +57,7 @@ public class InGameGUIController : MonoBehaviour
     }
     public void LoadGui()
     {
+        _setCur.ShowCursor(true);
         _setCur.SetGuiCursor();
         _inCanvas.enabled = true;
         Time.timeScale = 0f;
@@ -77,8 +78,8 @@ public class InGameGUIController : MonoBehaviour
     }
     public void OnBackToGameClick()
     {
-        _setCur.SetInGameCursor(); ;
         _inCanvas.enabled = false;
+        _setCur.ShowCursor(false);
         Time.timeScale = defaultScale;
     }
     public void OnSettingsClick()
