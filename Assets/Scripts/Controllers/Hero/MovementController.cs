@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
     [SerializeField] private HeroTowerController _towerCntrl;
     [SerializeField] private CameraRotateController _camRot;
     [SerializeField] private CameraMoveController _camMov;
+    [SerializeField] private MarkerController _marker;
     [SerializeField] private HeroStats _heroStats;
     [SerializeField] private TankAttack _att;
 
@@ -75,6 +76,7 @@ public class MovementController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             _att.TakeAction(3000f);
+            _marker.PlayShootSound();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !_paused)
         {

@@ -5,13 +5,13 @@ using UnityEngine;
 public class CameraMoveController : MonoBehaviour
 {
     [SerializeField] Transform _hero;
-    private Vector3 _camStartPos;
     private float _camUpDist = 3f;
     private float _camBackDist = 10f;
     private float _camDistFromTarget = 0f;
 
    public void MoveCamera()
     {
+        
         _camDistFromTarget = Vector3.Distance(transform.position, _hero.transform.position);
 
         transform.LookAt(_hero);

@@ -8,6 +8,8 @@ public class MarkerController : MonoBehaviour
     #region variables
     [SerializeField] private Ray _aimTarget;
     [SerializeField] private GameObject _aim;
+
+    [SerializeField] private AudioClip _shootClip;
     private float _aimTargetMaxDistance = 50;
     #endregion
     private void FixedUpdate ()
@@ -20,4 +22,14 @@ public class MarkerController : MonoBehaviour
            
         }
 	}
+    public void PlayShootSound()
+    {
+        var aSource = gameObject.GetComponent<AudioSource>();
+        
+        if (!aSource.isPlaying || aSource.isPlaying)
+        {
+            aSource.clip = _shootClip;
+            aSource.Play();
+        }
+    }
 }
