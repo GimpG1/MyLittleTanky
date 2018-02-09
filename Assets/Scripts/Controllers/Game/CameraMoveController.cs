@@ -10,7 +10,7 @@ public class CameraMoveController : MonoBehaviour
     private float _camBackDist = 10f;
     private float _camDistFromTarget = 0f;
 
-    private void Update()
+   public void MoveCamera()
     {
         _camDistFromTarget = Vector3.Distance(transform.position, _hero.transform.position);
 

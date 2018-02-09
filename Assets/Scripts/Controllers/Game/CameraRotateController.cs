@@ -9,7 +9,7 @@ public class CameraRotateController : MonoBehaviour
     [SerializeField] HeroTowerController _towerController;
     private float _camDistFromTarget = 0f;
 
-	private void Update ()
+	public void RotateCamera ()
     {
         _camDistFromTarget = Vector3.Distance(transform.position, _hero.transform.position);
 

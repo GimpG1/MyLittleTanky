@@ -11,11 +11,14 @@ public class MovementController : MonoBehaviour
     private float _towerAimRotation = 0f;
     [SerializeField] private InGameGUIController _inGameMenu;
     [SerializeField] private HeroTowerController _towerCntrl;
+    [SerializeField] private CameraRotateController _camRot;
+    [SerializeField] private CameraMoveController _camMov;
     [SerializeField] private HeroStats _heroStats;
     [SerializeField] private TankAttack _att;
 
     private bool _hasFuel = true;
     private bool _startEngine = false;
+    private bool _paused = false;
     private float _itsFuel;
     #endregion
     private void Awake()
@@ -41,18 +44,22 @@ public class MovementController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * _tankSpeed);
+                _camMov.MoveCamera();
             }
             if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(Vector3.back * Time.deltaTime * _tankSpeed);
+                _camMov.MoveCamera();
             }
             if (Input.GetKey(KeyCode.A))
             {
                 transform.Rotate(Vector3.down * Time.deltaTime * _tankRotationSpeed);
+                _camMov.MoveCamera();
             }
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Rotate(Vector3.up * Time.deltaTime * _tankRotationSpeed);
+                _camMov.MoveCamera();
             }
         }
         if (Input.GetKeyDown(KeyCode.X) && !_startEngine)
@@ -69,21 +76,32 @@ public class MovementController : MonoBehaviour
         {
             _att.TakeAction(3000f);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !_paused)
         {
             _inGameMenu.OnEscape();
             _heroStats.IsEngineWork = false;
             this._startEngine = false;
+            this._paused = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && !_startEngine)
+        else if (Input.GetKeyDown(KeyCode.Escape) && !_startEngine && _paused)
         {
             _heroStats.IsEngineWork = false;
             this._startEngine = false;
+            this._paused = false;
         }
-        GetTowerRotationAngle = Input.GetAxis("Mouse X") * Time.deltaTime;
-        _towerCntrl.UserSetTowerAngle(GetTowerRotationAngle);
-        GetAimRotationAngle = Input.GetAxis("Mouse Y") * Time.deltaTime;
-        _towerCntrl.UserSetAimAngle(GetAimRotationAngle);
+        if (Input.GetAxis("Mouse X") >= 1f || Input.GetAxis("Mouse X") <= 1f)
+        {
+            GetTowerRotationAngle = Input.GetAxis("Mouse X") * Time.deltaTime;
+            _towerCntrl.UserSetTowerAngle(GetTowerRotationAngle);
+            _camRot.RotateCamera();
+        }
+        if (Input.GetAxis("Mouse Y") >= 1f || Input.GetAxis("Mouse Y") <= 1f)
+        {
+            GetAimRotationAngle = Input.GetAxis("Mouse Y") * Time.deltaTime;
+            _towerCntrl.UserSetAimAngle(GetAimRotationAngle);
+            _camRot.RotateCamera();
+        }
+        
     }
 
     private void CheckFuel()

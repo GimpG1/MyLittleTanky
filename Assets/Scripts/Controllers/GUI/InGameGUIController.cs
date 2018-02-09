@@ -50,6 +50,10 @@ public class InGameGUIController : MonoBehaviour
     private void Update()
     {
         _inGameCamera.GetComponent<AudioListener>().enabled = true;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OnBackToGameClick();
+        }
     }
     public void OnEscape()
     {
