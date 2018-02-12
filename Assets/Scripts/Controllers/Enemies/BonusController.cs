@@ -47,7 +47,10 @@ public class BonusController : MonoBehaviour
 		{
 			hero.GetComponentInChildren<ObjectsFUEL>().SetGetFuel += fuel.SetGetFuel;
 			hero.GetComponentInChildren<ObjectsAMMUNATION>().SetGetAmmunation += ammo.SetGetAmmunation;
-            bonus.Push(gameObject);
+            if (gameObject != null)
+            {
+                bonus.Push(gameObject);
+            }
             gameObject.SetActive(false);
 		}
 	}
