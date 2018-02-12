@@ -9,34 +9,36 @@ public class SelfBomb : MonoBehaviour
 	[SerializeField] HeroStats hero;
 	[SerializeField] DetectPlayer detector;
 	[SerializeField] ObjectsAttackPOWER power;
-	[SerializeField] BonusController defeatBonus;
 	[SerializeField] AudioSource _bomSource;
 	[SerializeField] AudioClip _bomClip;
+    [SerializeField] DefeatBonus defeatBonus;
+    [SerializeField] GameObject _objBonus;
+    private Vector3 _bonusPos;
     #endregion
 
     private void Awake()
     {
-		if (hero == null)
+		if (hero == null ||
+            power == null ||
+            detector == null)
 		{
 			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
-		}
-		if (power == null) 
-		{
-			power = gameObject.GetComponent<ObjectsAttackPOWER> ();
-			power.SetGetAttackPower = 30;
-		}
-		if (detector == null) 
-		{
-			detector = gameObject.GetComponent<DetectPlayer> ();
-		}
-		if (defeatBonus == null) 
-		{
-			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
-		}
+
+            power = gameObject.GetComponent<ObjectsAttackPOWER>();
+            power.SetGetAttackPower = 30;
+
+            detector = gameObject.GetComponent<DetectPlayer>();
+        }
 		_bomSource = gameObject.GetComponent<AudioSource> ();
 		_bomSource.playOnAwake = false;
 
     }
+
+    private void Start()
+    {
+        _bonusPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+    }
+
     private void Update()
     {
 		if (detector.IsDetected)
@@ -58,8 +60,8 @@ public class SelfBomb : MonoBehaviour
 			{
 				hero.TakeDamage (power.SetGetAttackPower);
 			}
-			defeatBonus.SetBonusActive = true;
-			defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3, transform.position.y + 1, transform.position.z - 3));
+            _objBonus = defeatBonus.Pull();
+            _objBonus.transform.position = _bonusPos;
             if (!_bomSource.isPlaying || _bomSource.isPlaying)
             {
                 _bomSource.Stop();

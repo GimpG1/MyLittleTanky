@@ -9,27 +9,27 @@ public class Warrior : MonoBehaviour
 	[SerializeField] DetectPlayer detector;
 	[SerializeField] ObjectsHP _warriorHP;
 	[SerializeField] AmmoForcePOWER _warriorAmmoForce;
-	[SerializeField] BonusController defeatBonus;
-	[SerializeField] DamagedController _isDamaged;
+	[SerializeField] DefeatBonus defeatBonus;
+    [SerializeField] GameObject _objBonus;
+    [SerializeField] DamagedController _isDamaged;
 	[SerializeField] AmmunationController _controlAmmo;
 	[SerializeField] Vector3 _defaultPos;
-	#endregion
+    private Vector3 _bonusPos;
+    #endregion
 
 
-	private void Awake()
+    private void Awake()
 	{
 		if (hero == null ||
 			_warriorHP == null ||
 			detector == null ||
-			defeatBonus == null ||
 			_isDamaged == null ||
 			_warriorAmmoForce == null)
 
 		{
 			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
 			_warriorHP = gameObject.GetComponent<ObjectsHP> ();
-			detector = gameObject.GetComponent<DetectPlayer> ();
-			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
+            detector = gameObject.GetComponent<DetectPlayer>();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 			_controlAmmo = gameObject.GetComponentInChildren<AmmunationController> ();
 			_warriorAmmoForce = gameObject.GetComponent<AmmoForcePOWER> ();
@@ -39,7 +39,12 @@ public class Warrior : MonoBehaviour
 		}
 	}
 
-	private void Update()
+    private void Start()
+    {
+        _bonusPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+    }
+
+    private void Update()
 	{
 		if (detector.IsDetected)
 		{
@@ -54,7 +59,8 @@ public class Warrior : MonoBehaviour
 			Vector3 direction = player.position - transform.position;
 			Quaternion lookRotation = Quaternion.LookRotation (direction);
 			Vector3 rotation = Quaternion.Lerp (transform.rotation, lookRotation, 3f * Time.deltaTime).eulerAngles;
-			transform.rotation = Quaternion.Euler (0f, rotation.y, 0f);_controlAmmo.TakeAction (_warriorAmmoForce.SetGetAmmoPower);
+			transform.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+            _controlAmmo.TakeAction (_warriorAmmoForce.SetGetAmmoPower);
 		} else
 			transform.position = _defaultPos;
 	}
@@ -67,9 +73,9 @@ public class Warrior : MonoBehaviour
 			_isDamaged.SetGetDamaged = true;
 			if (_warriorHP.SetGetHp <= 0) 
 			{
-				defeatBonus.SetBonusActive = true;
-				defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3, transform.position.y + 1, transform.position.z - 3));
-				gameObject.SetActive (false);
+                _objBonus = defeatBonus.Pull();
+                _objBonus.transform.position = _bonusPos;
+                gameObject.SetActive (false);
 			}
 		}
 	}

@@ -8,25 +8,25 @@ public class Turrent : MonoBehaviour
 	[SerializeField] HeroStats hero;
 	[SerializeField] DetectPlayer detector;
 	[SerializeField] ObjectsHP _turretHP;
-	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
     [SerializeField] TurretShoot _turShot;
 	private Vector3 _defPos;
-	#endregion
+    [SerializeField] DefeatBonus defeatBonus;
+    [SerializeField] GameObject _objBonus;
+    private Vector3 _bonusPos;
+    #endregion
 
-	private void Awake()
+    private void Awake()
 	{
 		if (hero == null ||
 			_turretHP == null ||
 			detector == null ||
-			defeatBonus == null ||
 			_isDamaged == null)
 
 		{
 			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
 			_turretHP = gameObject.GetComponent<ObjectsHP> ();
 			detector = gameObject.GetComponent<DetectPlayer> ();
-			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 			_isDamaged = gameObject.GetComponent<DamagedController> ();
 
 			_turretHP.SetGetHp = 300;
@@ -36,15 +36,16 @@ public class Turrent : MonoBehaviour
 	private void Start()
 	{
 		_defPos = transform.position;
-	}
-	private void Update()
+        _bonusPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+    }
+	private void LateUpdate()
 	{
 		if (detector.IsDetected)
 		{
 			TurrentAttack (detector.HeroTransform);
 			transform.position = _defPos;
             float distance = Vector3.Distance(transform.position, detector.HeroTransform.position);
-            _turShot.TakeAction(distance * 1000);
+            StartCoroutine(AttackCorutine(distance));
             _isDamaged.SetGetDamaged = false;
 		}
 	}
@@ -65,9 +66,9 @@ public class Turrent : MonoBehaviour
 			_isDamaged.SetGetDamaged = true;
 			if (_turretHP.SetGetHp <= 0) 
 			{
-				defeatBonus.SetBonusActive = true;
-				defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3,transform.position.y + 1, transform.position.z - 3));
-				Destroy(gameObject);
+                _objBonus = defeatBonus.Pull();
+                _objBonus.transform.position = _bonusPos;
+                Destroy(gameObject);
 			}
 		}
 	}
@@ -77,4 +78,9 @@ public class Turrent : MonoBehaviour
 		_turretHP.SetGetHp -= damage;
 	}
 
+    IEnumerator AttackCorutine(float dist)
+    {
+        _turShot.TakeAction(dist * 100);
+        yield return new WaitForSeconds(50);
+    }
 }

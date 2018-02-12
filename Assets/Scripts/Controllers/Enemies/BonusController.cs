@@ -7,66 +7,48 @@ public class BonusController : MonoBehaviour
 	[SerializeField] ObjectsFUEL fuel;
 	[SerializeField] ObjectsAMMUNATION ammo;
 	[SerializeField] HeroStats hero;
-	private bool _isActive = false;
-	float timeLeft = 12f;
-
+    [SerializeField] DefeatBonus bonus;
+    private Vector3 defaultScale;
+    private Vector3 scale;
 	private void Awake()
 	{
-		if (fuel == null) 
+		if (fuel == null ||
+            ammo == null ||
+            hero == null) 
 		{
 			fuel = gameObject.GetComponent<ObjectsFUEL> ();
 			fuel.SetGetFuel = Random.Range (100, 300);
-		}
-		if (ammo == null) 
-		{
-			ammo = gameObject.GetComponent<ObjectsAMMUNATION> ();
-			ammo.SetGetAmmunation = Random.Range (2,20);
-		}
-		if (hero == null)
-		{
-			hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
-		}
+
+            ammo = gameObject.GetComponent<ObjectsAMMUNATION>();
+            ammo.SetGetAmmunation = Random.Range(2, 20);
+
+            hero = GameObject.Find("Tanky").GetComponent<HeroStats>();
+        }
 	}
 
-	private void Update()
-	{
-		gameObject.GetComponent<MeshRenderer> ().enabled = _isActive;
-		if (gameObject.GetComponent<MeshRenderer>().enabled) 
-		{
-			timeLeft -= Time.deltaTime;
-		}
-		if (timeLeft <= 0f) 
-		{
-			SetBonusActive = false;
-		}
-	}
+    private void Start()
+    {
+        defaultScale = new Vector3(0.2f,0.2f,0.2f);
+    }
+    private void Update()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            scale.x = Mathf.Sin(Time.time * 0.5f);
+            scale.z = Mathf.Sin(Time.time * 0.5f);
+            scale.y = Mathf.Sin(Time.time * 0.5f);
+            transform.localScale = scale;
+        }
+    }
 
-	private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.CompareTag("Player"))
 		{
 			hero.GetComponentInChildren<ObjectsFUEL>().SetGetFuel += fuel.SetGetFuel;
 			hero.GetComponentInChildren<ObjectsAMMUNATION>().SetGetAmmunation += ammo.SetGetAmmunation;
-			SetBonusActive = false;
-			timeLeft = 12f;
+            bonus.Push(gameObject);
+            gameObject.SetActive(false);
 		}
-	}
-
-
-	public bool SetBonusActive
-	{
-		get
-		{
-			return _isActive;
-		}
-		set
-		{ 
-			_isActive = value;
-		}
-	}
-
-	public void SpawnPlace(Vector3 spawnPos)
-	{
-		transform.position = spawnPos;
 	}
 }
