@@ -10,6 +10,7 @@ public class Turrent : MonoBehaviour
 	[SerializeField] ObjectsHP _turretHP;
 	[SerializeField] BonusController defeatBonus;
 	[SerializeField] DamagedController _isDamaged;
+    [SerializeField] TurretShoot _turShot;
 	private Vector3 _defPos;
 	#endregion
 
@@ -42,7 +43,9 @@ public class Turrent : MonoBehaviour
 		{
 			TurrentAttack (detector.HeroTransform);
 			transform.position = _defPos;
-			_isDamaged.SetGetDamaged = false;
+            float distance = Vector3.Distance(transform.position, detector.HeroTransform.position);
+            _turShot.TakeAction(distance * 1000);
+            _isDamaged.SetGetDamaged = false;
 		}
 	}
 

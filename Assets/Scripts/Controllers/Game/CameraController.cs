@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class CameraController : MonoBehaviour
 {
     #region Private Variables

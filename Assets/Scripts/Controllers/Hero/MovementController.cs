@@ -103,7 +103,7 @@ public class MovementController : MonoBehaviour
             _towerCntrl.UserSetAimAngle(GetAimRotationAngle);
             _camRot.RotateCamera();
         }
-        
+        _camMov.MoveCamera();
     }
 
     private void CheckFuel()

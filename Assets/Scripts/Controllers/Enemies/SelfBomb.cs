@@ -34,7 +34,6 @@ public class SelfBomb : MonoBehaviour
 			defeatBonus = GameObject.Find("DefeatBonus").GetComponent<BonusController> ();
 		}
 		_bomSource = gameObject.GetComponent<AudioSource> ();
-		_bomSource.clip = _bomClip;
 		_bomSource.playOnAwake = false;
 
     }
@@ -61,8 +60,10 @@ public class SelfBomb : MonoBehaviour
 			}
 			defeatBonus.SetBonusActive = true;
 			defeatBonus.SpawnPlace (new Vector3(transform.position.x - 3, transform.position.y + 1, transform.position.z - 3));
-            if (_bomSource.isPlaying == false)
+            if (!_bomSource.isPlaying || _bomSource.isPlaying)
             {
+                _bomSource.Stop();
+                _bomSource.clip = _bomClip;
                 _bomSource.Play();
             }
 			Destroy(gameObject);
