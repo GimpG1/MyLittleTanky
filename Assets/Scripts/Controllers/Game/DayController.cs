@@ -6,6 +6,7 @@ public class DayController : MonoBehaviour
 {
     private Vector3 _centerScene = new Vector3(250f, 0f, 250f);
     private float _rotateSpeed = 6f;
+    [SerializeField] SoundAreasController _soundCntrl;
 
     void Update()
     {
@@ -14,8 +15,12 @@ public class DayController : MonoBehaviour
         if (transform.position.y > 50f)
         {
             _rotateSpeed = 1f;
+            _soundCntrl.SetDayTime = 1;
         }
         else
+        {
             _rotateSpeed = 6f;
+            _soundCntrl.SetDayTime = 2;
+        }
     }
 }

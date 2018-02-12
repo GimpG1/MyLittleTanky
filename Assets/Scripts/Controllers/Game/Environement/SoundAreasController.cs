@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundAreasController : MonoBehaviour
 {
     [SerializeField] CameraController _myCamAudio;
+    [SerializeField] AudioMixerSnapshot[] mixerSnapshot;
 
     enum SoundArea
     {
@@ -12,12 +14,6 @@ public class SoundAreasController : MonoBehaviour
         Desert = 1,
         Forest = 2,
         Oaza = 3
-    }
-
-    enum DayTime
-    {
-        Day = 1,
-        Night = 2
     }
 
     private int _soundArea = 4;
@@ -32,33 +28,33 @@ public class SoundAreasController : MonoBehaviour
     {
         if (area == (int)SoundArea.Base)
         {
-            Debug.Log("Base");
+            // el 0 base
+            mixerSnapshot[0].TransitionTo(1);
+            _myCamAudio.ChangeBackGroundSounds(SetSoundArea, SetDayTime);
+            
         }
-        else if (area == (int)SoundArea.Desert)
+        if (area == (int)SoundArea.Desert)
         {
-            Debug.Log("Desert");
+            // el 1 desert
+            mixerSnapshot[1].TransitionTo(1);
+            _myCamAudio.ChangeBackGroundSounds(SetSoundArea, SetDayTime);
         }
-        else if (area == (int)SoundArea.Forest)
+        if (area == (int)SoundArea.Forest)
         {
-            Debug.Log("Forest");
+            // el 2 forest
+            mixerSnapshot[2].TransitionTo(1);
+            _myCamAudio.ChangeBackGroundSounds(SetSoundArea, SetDayTime);
         }
-        else if (area == (int)SoundArea.Oaza)
+        if (area == (int)SoundArea.Oaza)
         {
-            Debug.Log("Oaza");
-        }
-
-        if (daytime == (int)DayTime.Day)
-        {
-            Debug.Log("Day");
-        }
-        else if (daytime == (int)DayTime.Night)
-        {
-            Debug.Log("Night");
+            // el 3 oaza
+            mixerSnapshot[3].TransitionTo(1);
+            _myCamAudio.ChangeBackGroundSounds(SetSoundArea, SetDayTime);
         }
     }
     public int SetSoundArea
     {
-        private get
+        get
         {
             return _soundArea;
         }
@@ -70,7 +66,7 @@ public class SoundAreasController : MonoBehaviour
 
     public int SetDayTime
     {
-        private get
+        get
         {
             return _dayTime;
         }

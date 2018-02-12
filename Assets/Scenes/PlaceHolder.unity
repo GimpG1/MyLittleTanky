@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c69284f280fa00438ce32e6962b721e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundCntrl: {fileID: 186993416}
 --- !u!1 &11914106
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +801,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myCamAudio: {fileID: 691676628}
+  mixerSnapshot:
+  - {fileID: 24500006, guid: ee64f18125a8e9f449845b59b450840c, type: 2}
+  - {fileID: 245151053137618934, guid: ee64f18125a8e9f449845b59b450840c, type: 2}
+  - {fileID: 245137686157316940, guid: ee64f18125a8e9f449845b59b450840c, type: 2}
+  - {fileID: 245811645283345548, guid: ee64f18125a8e9f449845b59b450840c, type: 2}
 --- !u!1 &214251262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,12 +2163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b9a972713b22e45bbcc8bab291ca0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundSounds:
-  - {fileID: 8300000, guid: d8280c4988bda93408a20b0c19f1bb9d, type: 3}
+  _baseBackgroundSounds:
   - {fileID: 8300000, guid: e7b5ad44dbf63fa4da52f1df6fbd74a6, type: 3}
   - {fileID: 8300000, guid: 7cd1af913db1aed4590d43d5e29a289e, type: 3}
   - {fileID: 8300000, guid: 6a9f4e9006a800b4cac84a698cb9f4dd, type: 3}
   - {fileID: 8300000, guid: 8347814c7b71abb43ab8c9e312acca8a, type: 3}
+  _oazaSound: {fileID: 8300000, guid: 8e127033d98c3ad4da5714bb77b2f8cd, type: 3}
+  _desertSounds:
+  - {fileID: 8300000, guid: 428212a9f72494943a8e35fea7dcfa3b, type: 3}
+  - {fileID: 8300000, guid: 203e353423224a94db1d087dd36fb821, type: 3}
+  _forestSounds:
+  - {fileID: 8300000, guid: a531651832305d944ad299121efddc41, type: 3}
+  - {fileID: 8300000, guid: b6d117249a767a54097720a7b55fce4a, type: 3}
+  _soundCntrl: {fileID: 186993416}
 --- !u!82 &691676629
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6215,6 +6228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _myCamAudio: {fileID: 691676628}
+  mixerSnapshot: []
 --- !u!1 &2060459057
 GameObject:
   m_ObjectHideFlags: 0
