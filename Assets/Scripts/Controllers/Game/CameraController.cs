@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         {
             this._isPlayingActually = true;
         }
-        if (_isPlayingActually)
+        if (_isPlayingActually && _changeTrack)
         {
             ChangeBackGroundSound(_soundAreas.GetSoundIndexToPlay());
             this._isPlayingActually = false;
