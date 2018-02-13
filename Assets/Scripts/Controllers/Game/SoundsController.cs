@@ -10,11 +10,11 @@ public class SoundsController : MonoBehaviour
 
 	public void SetMusicVolume(float volume)
 	{
-		_masterMixer.SetFloat ("MusVol",volume);
+		_masterMixer.SetFloat ("MusVol", volume);
 	}
 
 	public void SetSfxVolume(float volume)
 	{
-		_masterMixer.SetFloat ("SfxVol",volume);
+		_masterMixer.SetFloat ("SfxVol", volume);
 	}
 }
