@@ -64,7 +64,7 @@ public class SelfBomb : MonoBehaviour
             _objBonus.transform.position = _bonusPos;
             if (!_bomSource.isPlaying || _bomSource.isPlaying)
             {
-                _bomSource.Stop();
+                _bomSource.enabled = true;
                 _bomSource.clip = _bomClip;
                 _bomSource.Play();
             }

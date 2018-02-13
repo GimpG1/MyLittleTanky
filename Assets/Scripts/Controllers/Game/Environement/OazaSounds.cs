@@ -9,14 +9,14 @@ public class OazaSounds : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _soundCntrl.SetSoundArea = 3;
+            _soundCntrl.SwitchArea(3);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _soundCntrl.SetSoundArea = 1;
+            _soundCntrl.SwitchArea(1);
         }
     }
 }

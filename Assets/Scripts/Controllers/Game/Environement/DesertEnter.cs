@@ -9,7 +9,7 @@ public class DesertEnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _soundCntrl.SetSoundArea = 1;
+            _soundCntrl.SwitchArea(1);
         }
     }
 }

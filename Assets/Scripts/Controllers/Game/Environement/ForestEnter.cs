@@ -9,7 +9,7 @@ public class ForestEnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _soundCntrl.SetSoundArea = 2;
+            _soundCntrl.SwitchArea(2);
         }
     }
 }

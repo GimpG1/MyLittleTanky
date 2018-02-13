@@ -7,34 +7,30 @@ public class CameraController : MonoBehaviour
 {
     #region Private Variables
     [SerializeField] AudioClip[] _baseBackgroundSounds;
-    [SerializeField] AudioClip _oazaSound;
-    [SerializeField] AudioClip[] _desertSounds;
-    [SerializeField] AudioClip[] _forestSounds;
-    [SerializeField] SoundAreasController _soundCntrl;
+    [SerializeField] SoundAreasController _soundAreas;
     private AudioSource _source;
    
-    private int _playSoundAt = 0;
     private bool _isPlayingActually = false;
+    private bool _changeTrack;
     #endregion
 
 	private void Start ()
     {
 		_source = gameObject.GetComponent<AudioSource> ();
 		_source.Stop ();
-        _playSoundAt = Random.Range(0, 4);
-        ChangeBackGroundSound(_playSoundAt);
     }
 
-	private void Update()
+    private void Update()
 	{
-        if (!_source.isPlaying)
+        
+        SetChangeTrack = _soundAreas.AreaChanged();
+        if (!_source.isPlaying && !_changeTrack)
         {
             this._isPlayingActually = true;
         }
         if (_isPlayingActually)
         {
-            _playSoundAt = Random.Range(0, 4);
-            ChangeBackGroundSound(_playSoundAt);
+            ChangeBackGroundSound(_soundAreas.GetSoundIndexToPlay());
             this._isPlayingActually = false;
         }
 	}
@@ -44,47 +40,10 @@ public class CameraController : MonoBehaviour
 		_source.clip = _baseBackgroundSounds[soundIndex];
 		_source.Play ();
 	}
-    public void ChangeBackGroundSounds(int area, int daytime)
+
+    public bool SetChangeTrack
     {
-        if (area == 0 && daytime == 1)
-        {
-            _playSoundAt = Random.Range(0, 4);
-            ChangeBackGroundSound(_playSoundAt);
-        }
-        if (area == 1 && daytime == 1)
-        {
-            _source.clip = _desertSounds[0];
-            _source.Play();
-        }
-        if (area == 2 && daytime == 1)
-        {
-            _source.clip = _forestSounds[0];
-            _source.Play();
-        }
-        if (area == 3 && daytime == 1)
-        {
-            _source.clip = _oazaSound;
-            _source.Play();
-        }
-        if (area == 0 && daytime == 2)
-        {
-            _playSoundAt = Random.Range(0, 5);
-            ChangeBackGroundSound(_playSoundAt);
-        }
-        if (area == 1 && daytime == 2)
-        {
-            _source.clip = _desertSounds[1];
-            _source.Play();
-        }
-        if (area == 2 && daytime == 2)
-        {
-            _source.clip = _forestSounds[1];
-            _source.Play();
-        }
-        if (area == 3 && daytime == 2)
-        {
-            _source.clip = _oazaSound;
-            _source.Play();
-        }
+        get { return _changeTrack; }
+        private set { _changeTrack = value; }
     }
 }
