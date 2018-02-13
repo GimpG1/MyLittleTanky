@@ -31,7 +31,6 @@ public class StationController : MonoBehaviour
     private void LateUpdate()
     {
         amountFuel = _objFuel.SetGetFuel;
-        Debug.Log(amountFuel.ToString());
         if (amountFuel <= maxFuel)
         {
             ReloadStation(true);
