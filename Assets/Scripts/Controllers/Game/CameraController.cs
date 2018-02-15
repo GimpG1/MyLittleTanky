@@ -9,9 +9,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] AudioClip[] _baseBackgroundSounds;
     [SerializeField] SoundAreasController _soundAreas;
     private AudioSource _source;
-   
-    private bool _isPlayingActually = false;
-    private bool _changeTrack;
+    private int _trackToPlay;
+   // private bool _isPlayingActually = false;
     #endregion
 
 	private void Start ()
@@ -22,28 +21,25 @@ public class CameraController : MonoBehaviour
 
     private void Update()
 	{
-        
-        SetChangeTrack = _soundAreas.AreaChanged();
-        if (!_source.isPlaying && !_changeTrack)
+        SetTrack = _soundAreas.GetSoundIndexToPlay;
+        if (!_source.isPlaying)
         {
-            this._isPlayingActually = true;
+            _changeBackGroundSound(_trackToPlay);
         }
-        if (_isPlayingActually && _changeTrack)
+        if (_source.isPlaying)
         {
-            ChangeBackGroundSound(_soundAreas.GetSoundIndexToPlay());
-            this._isPlayingActually = false;
+            _changeBackGroundSound(_trackToPlay);
         }
 	}
 
-	public void ChangeBackGroundSound(int soundIndex)
+	public void _changeBackGroundSound(int soundIndex)
 	{
 		_source.clip = _baseBackgroundSounds[soundIndex];
 		_source.Play ();
 	}
-
-    public bool SetChangeTrack
+    public int SetTrack
     {
-        get { return _changeTrack; }
-        private set { _changeTrack = value; }
+        get { return _trackToPlay; }
+        private set { _trackToPlay = value; }
     }
 }

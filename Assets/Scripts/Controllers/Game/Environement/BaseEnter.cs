@@ -9,7 +9,7 @@ public class BaseEnter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _soundCntrl.SwitchArea(0);
+            _soundCntrl.SwitchArea(0, true);
         }
     }
 }

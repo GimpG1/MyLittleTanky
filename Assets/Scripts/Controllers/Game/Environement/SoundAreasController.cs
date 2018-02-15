@@ -15,72 +15,62 @@ public class SoundAreasController : MonoBehaviour
         Forest = 2,
         Oaza = 3
     }
-
-    private int _soundArea;
+    
     private int _dayTime;
     private int _playSoundIndex;
     private bool _isRandomized;
-    private bool _changed;
-    
-    public void SwitchArea(int area)
+    private bool _change;
+
+    private void Update()
     {
-        if (area == (int)SoundArea.Base)
+       // Debug.Log(_playSoundIndex.ToString() + " sound areacontroller");
+    }
+    public void SwitchArea(int area, bool change)
+    {
+        Debug.Log("inside switch " + _playSoundIndex.ToString());
+        _change = change;
+        if (area == (int)SoundArea.Base && _change == true)
         {
             // el 0 base
+           // Debug.Log("inside base " + _playSoundIndex.ToString());
             this._isRandomized = false;
             mixerSnapshot[0].TransitionTo(1);
             if (!_isRandomized)
             {
                 this._playSoundIndex = Random.Range(0, 4);
                 this._isRandomized = true;
+               // Debug.Log("randomized " + _playSoundIndex.ToString());
             }
-            _changed = true;
+            _change = false;
         }
-        if (area == (int)SoundArea.Desert)
+        if (area == (int)SoundArea.Desert && _change)
         {
             // el 1 desert
             mixerSnapshot[3].TransitionTo(1);
             this._playSoundIndex = 4;
-            _changed = true;
         }
         if (area == (int)SoundArea.Desert && SetDayTime == 2)
         {
             this._playSoundIndex = 5;
-            _changed = true;
         }
-        if (area == (int)SoundArea.Forest)
+        if (area == (int)SoundArea.Forest && _change)
         {
             // el 2 forest
             mixerSnapshot[2].TransitionTo(1);
             this._playSoundIndex = 6;
-            _changed = true;
         }
         if (area == (int)SoundArea.Forest && SetDayTime == 2)
         {
             this._playSoundIndex = 7;
-            _changed = true;
         }
-        if (area == (int)SoundArea.Oaza)
+        if (area == (int)SoundArea.Oaza && _change)
         {
             // el 3 oaza
             mixerSnapshot[1].TransitionTo(1);
             this._playSoundIndex = 8;
-            _changed = true;
         }
-        _changed = false;
+        _change = false;
     }
-    public int SetSoundArea
-    {
-        get
-        {
-            return _soundArea;
-        }
-        set
-        {
-            _soundArea = value;
-        }
-    }
-
     public int SetDayTime
     {
         get
@@ -93,13 +83,8 @@ public class SoundAreasController : MonoBehaviour
         }
     }
 
-    public int GetSoundIndexToPlay()
+    public int GetSoundIndexToPlay
     {
-        return _playSoundIndex;
-    }
-
-    public bool AreaChanged()
-    {
-        return _changed;
+        get { return _playSoundIndex; }
     }
 }

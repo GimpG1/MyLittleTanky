@@ -24,7 +24,7 @@ public class HeroTowerController : MonoBehaviour
         towerZAngle += GetSetTowerAngle * _rotateSpeed * Time.deltaTime;
         _tankTower.transform.RotateAroundLocal(Vector3.up, towerZAngle);
         aimYAngle += GetSetAimAngle / _aimSpeed * Time.deltaTime;
-        if (_tankAim.transform.rotation.y <= maxYAimAngle || _tankAim.transform.rotation.y >= minYAimAngle)
+        if (_tankAim.transform.rotation.y >= maxYAimAngle || _tankAim.transform.rotation.y <= minYAimAngle)
         {
             _tankAim.transform.RotateAroundLocal(Vector3.up, aimYAngle);
         }
