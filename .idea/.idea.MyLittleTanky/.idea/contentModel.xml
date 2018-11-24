@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\GitSe\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\GitSe\.Rider2018.2\system\resharper-host\Local\Transient\ReSharperHost\v182\SolutionCaches\_MyLittleTanky.-1748370738.00" t="ExcludeRecursive" />
+    <e p="C:\Users\GitSe\Documents\GitHub\MyLittleTanky" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Models" t="Include">
+          <e p="Free Low Poly Desert Pack" t="Include">
+            <e p="Materials" t="Include">
+              <e p="Shaders" t="Include">
+                <e p="Vertex_Color_Basic.shader" t="Include" />
+                <e p="Vertex_Color_Unlit.shader" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Controllers" t="Include">
+            <e p="Enemies" t="Include">
+              <e p="BonusController.cs" t="Include" />
+              <e p="DetectPlayer.cs" t="Include" />
+              <e p="SelfBomb.cs" t="Include" />
+              <e p="Turrent.cs" t="Include" />
+              <e p="TurretShoot.cs" t="Include" />
+              <e p="Warrior.cs" t="Include" />
+            </e>
+            <e p="Game" t="Include">
+              <e p="AmmunationController.cs" t="Include" />
+              <e p="CameraController.cs" t="Include" />
+              <e p="CameraMoveController.cs" t="Include" />
+              <e p="CameraRotateController.cs" t="Include" />
+              <e p="DayController.cs" t="Include" />
+              <e p="DefeatBonus.cs" t="Include" />
+              <e p="Environement" t="Include">
+                <e p="BaseEnter.cs" t="Include" />
+                <e p="DesertEnter.cs" t="Include" />
+                <e p="ForestEnter.cs" t="Include" />
+                <e p="OazaSounds.cs" t="Include" />
+                <e p="SoundAreasController.cs" t="Include" />
+              </e>
+              <e p="NightController.cs" t="Include" />
+              <e p="SoundsController.cs" t="Include" />
+            </e>
+            <e p="GUI" t="Include">
+              <e p="InGameGUIController.cs" t="Include" />
+              <e p="MainGUIController.cs" t="Include" />
+              <e p="OnClickSound.cs" t="Include" />
+              <e p="SetGameCursor.cs" t="Include" />
+            </e>
+            <e p="Hero" t="Include">
+              <e p="HeroStats.cs" t="Include" />
+              <e p="HeroTowerController.cs" t="Include" />
+              <e p="MarkerController.cs" t="Include" />
+              <e p="MovementController.cs" t="Include" />
+              <e p="TankAttack.cs" t="Include" />
+              <e p="TankSelfDamage.cs" t="Include" />
+            </e>
+          </e>
+          <e p="GameObjects" t="Include">
+            <e p="DamagedController.cs" t="Include" />
+            <e p="EndGameController.cs" t="Include" />
+            <e p="GasStation" t="Include">
+              <e p="StationController.cs" t="Include" />
+            </e>
+            <e p="ManageFuelBar.cs" t="Include" />
+            <e p="ManageHealthBar.cs" t="Include" />
+            <e p="Objects" t="Include">
+              <e p="AmmoForcePOWER.cs" t="Include" />
+              <e p="AmmoReloadSPEED.cs" t="Include" />
+              <e p="ObjectsAMMUNATION.cs" t="Include" />
+              <e p="ObjectsAttackPOWER.cs" t="Include" />
+              <e p="ObjectsFUEL.cs" t="Include" />
+              <e p="ObjectsHP.cs" t="Include" />
+            </e>
+            <e p="ProjectileHandler.cs" t="Include" />
+            <e p="SetProjectile.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Library" t="ExcludeRecursive" />
+      <e p="MyLittleTanky.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp" t="ExcludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
